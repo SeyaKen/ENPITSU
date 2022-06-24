@@ -32,6 +32,8 @@ class _AnswersState extends State<Answers> {
     return StreamBuilder<QuerySnapshot>(
         stream: questionsListsStream,
         builder: (context, snapshot) {
+                                        print(snapshot);
+
           return snapshot.hasData
               ? ListView.builder(
                   itemCount: snapshot.data!.docs.length,
