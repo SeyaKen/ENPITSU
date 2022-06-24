@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "98014109771",
+    "project_id": "eigo-224ae",
+    "storage_bucket": "eigo-224ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98014109771:android:0ac9dfad24d603d2c12dce",
+        "android_client_info": {
+          "package_name": "com.example.eigo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98014109771-501cu5h22pbh00dutas86oamo7eff61i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnhF9UkfeUtH8hDAWwWO_IxAfxKAfm0xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98014109771-501cu5h22pbh00dutas86oamo7eff61i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "98014109771-esm1ms2nf9r0fgh363n2e39nos706m75.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.eigo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
