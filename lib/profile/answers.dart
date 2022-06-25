@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/HomeDetail/home_detail.dart';
 import 'package:eigo/services/database.dart';
@@ -15,15 +16,30 @@ class _AnswersState extends State<Answers> {
   _AnswersState(this.uid);
   String uid;
   Stream<QuerySnapshot<Object?>>? questionsListsStream;
+  final ScrollController _scrollController = ScrollController();
+  int _currentMax = 10;
 
   getQuestinosLists() async {
     questionsListsStream = DatabaseService(uid).personalAnsersCollect();
     setState(() {});
   }
 
+  _getMoreData() async {
+    _currentMax = _currentMax + 10;
+    questionsListsStream = await DatabaseService(uid).additionalPersonalQuestions(_currentMax);
+    // UIを読み込み直す
+    setState(() {});
+  }
+
   @override
   void initState() {
     getQuestinosLists();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getMoreData();
+      }
+    });
     super.initState();
   }
 
@@ -34,9 +50,12 @@ class _AnswersState extends State<Answers> {
         builder: (context, snapshot) {
           return snapshot.hasData
               ? ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
+                  controller: _scrollController,
+                  itemCount: snapshot.data!.docs.length + 1,
                   itemBuilder: (BuildContext context, int index) {
-                    return InkWell(
+                    return index == snapshot.data!.docs.length
+                      ? const CupertinoActivityIndicator()
+                      : InkWell(
                       onTap: () {
                         Navigator.push(
                           context,

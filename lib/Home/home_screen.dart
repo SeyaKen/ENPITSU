@@ -17,8 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   Stream<QuerySnapshot<Object?>>? questionsListsStream, searchStateStream;
   final ScrollController _scrollController = ScrollController();
-  int _currentMax = 50;
-  bool _isLoading = false;
+  int _currentMax = 20;
 
   getHomeLists() async {
     questionsListsStream = DatabaseService(uid).dataCollect();
@@ -30,9 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _getMoreData() async {
-    _currentMax = _currentMax + 50;
-    print(_currentMax);
-    questionsListsStream = await DatabaseService(uid).FetchAdditionalData(_currentMax);
+    _currentMax = _currentMax + 20;
+    questionsListsStream = await DatabaseService(uid).fetchAdditionalData(_currentMax);
     // UIを読み込み直す
     setState(() {});
   }
@@ -40,14 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     onScreenLoaded();
-    Future.delayed(Duration.zero).then((_) async {
-      setState(() {
-        _isLoading = true;
-      });
-      setState(() {
-        _isLoading = false;
-      });
-    });
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
@@ -128,8 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: snapshot.data!.docs.length + 1,
                     itemBuilder: (BuildContext context, int index) {
                       return index == snapshot.data!.docs.length
-                      ? const SizedBox(
-                          height: 140,child: CupertinoActivityIndicator())
+                      ? const CupertinoActivityIndicator()
                       : InkWell(
                         onTap: () {
                           Navigator.push(

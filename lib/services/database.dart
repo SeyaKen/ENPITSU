@@ -20,12 +20,12 @@ class DatabaseService extends ChangeNotifier {
     return FirebaseFirestore.instance
         .collection('questions')
         .orderBy('date', descending: true)
-        .limit(50)
+        .limit(10)
         .snapshots();
   }
 
-  // 追加の質問1欄？をうつす関数
-  Future<Stream<QuerySnapshot>> FetchAdditionalData(int suuji) async {
+  // 追加の質問一欄？をうつす関数
+  Future<Stream<QuerySnapshot>> fetchAdditionalData(int suuji) async {
     return FirebaseFirestore.instance
         .collection('questions')
         .orderBy('date', descending: true)
@@ -59,7 +59,7 @@ class DatabaseService extends ChangeNotifier {
         .collection('questions')
         .orderBy('date', descending: true)
         .where('asker', isEqualTo: uid)
-        .limit(50)
+        .limit(10)
         .snapshots();
   }
 
@@ -69,7 +69,17 @@ class DatabaseService extends ChangeNotifier {
         .collection('questions')
         .orderBy('date', descending: true)
         .where('answersList', arrayContains: uid)
-        .limit(50)
+        .limit(10)
+        .snapshots();
+  }
+
+  // 追加の質問を持ってくる関数
+  Future<Stream<QuerySnapshot>> additionalPersonalQuestions(int personalSuuji) async  {
+    return FirebaseFirestore.instance
+        .collection('questions')
+        .orderBy('date', descending: true)
+        .where('answersList', arrayContains: uid)
+        .limit(personalSuuji)
         .snapshots();
   }
 
