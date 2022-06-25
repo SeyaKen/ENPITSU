@@ -111,7 +111,7 @@ class _AnswerScreenState extends State<AnswerScreen> {
                   child: const Text(
                     '回答する',
                     style: TextStyle(
-                      color: Color(0xff0095f6),
+                      color: Color(0xff3B00FF),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

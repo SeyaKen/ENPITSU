@@ -120,7 +120,7 @@ class _AnswerScreenState extends State<EditAnswer> {
                     child: const Text(
                       '編集する',
                       style: TextStyle(
-                        color: Color(0xff0095f6),
+                        color: Color(0xff3B00FF),
                         fontWeight: FontWeight.bold,
                       ),
                     ),

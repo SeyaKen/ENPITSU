@@ -156,7 +156,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     child: const Text(
                       '公開',
                       style: TextStyle(
-                        color: Color(0xff0095f6),
+                        color: Color(0xff3B00FF),
                         fontWeight: FontWeight.bold,
                       ),
                     ),

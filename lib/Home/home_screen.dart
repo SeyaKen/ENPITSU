@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/HomeDetail/home_detail.dart';
 import 'package:eigo/Questions/questions_screen.dart';
@@ -15,6 +16,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   Stream<QuerySnapshot<Object?>>? questionsListsStream, searchStateStream;
+  final ScrollController _scrollController = ScrollController();
+  int _currentMax = 50;
+  bool _isLoading = false;
 
   getHomeLists() async {
     questionsListsStream = DatabaseService(uid).dataCollect();
@@ -25,9 +29,31 @@ class _HomeScreenState extends State<HomeScreen> {
     getHomeLists();
   }
 
+  _getMoreData() async {
+    _currentMax = _currentMax + 50;
+    print(_currentMax);
+    questionsListsStream = await DatabaseService(uid).FetchAdditionalData(_currentMax);
+    // UIを読み込み直す
+    setState(() {});
+  }
+
   @override
   void initState() {
     onScreenLoaded();
+    Future.delayed(Duration.zero).then((_) async {
+      setState(() {
+        _isLoading = true;
+      });
+      setState(() {
+        _isLoading = false;
+      });
+    });
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _getMoreData();
+      }
+    });
     super.initState();
   }
 
@@ -98,9 +124,13 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, snapshot) {
             return snapshot.hasData
                 ? ListView.builder(
-                    itemCount: snapshot.data!.docs.length,
+                    controller: _scrollController,
+                    itemCount: snapshot.data!.docs.length + 1,
                     itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
+                      return index == snapshot.data!.docs.length
+                      ? const SizedBox(
+                          height: 140,child: CupertinoActivityIndicator())
+                      : InkWell(
                         onTap: () {
                           Navigator.push(
                             context,

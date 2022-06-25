@@ -24,6 +24,15 @@ class DatabaseService extends ChangeNotifier {
         .snapshots();
   }
 
+  // 追加の質問1欄？をうつす関数
+  Future<Stream<QuerySnapshot>> FetchAdditionalData(int suuji) async {
+    return FirebaseFirestore.instance
+        .collection('questions')
+        .orderBy('date', descending: true)
+        .limit(suuji)
+        .snapshots();
+  }
+
   // 検索した質問一覧をうつす関数
   Future<Stream<QuerySnapshot<Map<String, dynamic>>>?> searchDataCollect(
       searchWordsList) async {

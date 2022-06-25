@@ -41,7 +41,7 @@ class _mailRegisterState extends State<mailRegister> {
                   widget.toggleView();
                 },
                 style: TextButton.styleFrom(
-                  primary: const Color(0xff0095f6),
+                  primary: const Color(0xff3B00FF),
                 ),
               )
             ],
@@ -95,7 +95,7 @@ class _mailRegisterState extends State<mailRegister> {
                               horizontal: 10, vertical: 13),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xff0095f6),
+                              color: Color(0xff3B00FF),
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -129,7 +129,7 @@ class _mailRegisterState extends State<mailRegister> {
                                   horizontal: 10, vertical: 13),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xff0095f6),
+                                  color: Color(0xff3B00FF),
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -165,8 +165,8 @@ class _mailRegisterState extends State<mailRegister> {
                     Container(
                       decoration: BoxDecoration(
                         color: password.length >= 7
-                            ? const Color(0xff0095f6)
-                            : const Color(0xff0095f6).withOpacity(0.3),
+                            ? const Color(0xff3B00FF)
+                            : const Color(0xff3B00FF).withOpacity(0.3),
                         borderRadius: BorderRadius.circular(3),
                       ),
                       width: MediaQuery.of(context).size.width * 0.8,
