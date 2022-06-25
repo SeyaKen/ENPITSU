@@ -63,8 +63,18 @@ class DatabaseService extends ChangeNotifier {
         .snapshots();
   }
 
-  // 個人的な？質問一覧をうつす関数
-  Stream<QuerySnapshot<Map<String, dynamic>>> personalAnsersCollect() {
+  // 追加の答えを持ってくる関数
+  Future<Stream<QuerySnapshot>> additionalPersonalQuestions(int personalQuestionsSuuji) async  {
+    return FirebaseFirestore.instance
+        .collection('questions')
+        .orderBy('date', descending: true)
+        .where('asker', isEqualTo: uid)
+        .limit(personalQuestionsSuuji)
+        .snapshots();
+  }
+
+  // 個人的な？答え一覧をうつす関数
+  Stream<QuerySnapshot<Map<String, dynamic>>> personalAnswersCollect() {
     return FirebaseFirestore.instance
         .collection('questions')
         .orderBy('date', descending: true)
@@ -73,8 +83,8 @@ class DatabaseService extends ChangeNotifier {
         .snapshots();
   }
 
-  // 追加の質問を持ってくる関数
-  Future<Stream<QuerySnapshot>> additionalPersonalQuestions(int personalSuuji) async  {
+  // 追加の答えを持ってくる関数
+  Future<Stream<QuerySnapshot>> additionalPersonalAnswers(int personalSuuji) async  {
     return FirebaseFirestore.instance
         .collection('questions')
         .orderBy('date', descending: true)

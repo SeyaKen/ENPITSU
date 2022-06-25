@@ -20,13 +20,13 @@ class _AnswersState extends State<Answers> {
   int _currentMax = 10;
 
   getQuestinosLists() async {
-    questionsListsStream = DatabaseService(uid).personalAnsersCollect();
+    questionsListsStream = DatabaseService(uid).personalAnswersCollect();
     setState(() {});
   }
 
   _getMoreData() async {
     _currentMax = _currentMax + 10;
-    questionsListsStream = await DatabaseService(uid).additionalPersonalQuestions(_currentMax);
+    questionsListsStream = await DatabaseService(uid).additionalPersonalAnswers(_currentMax);
     // UIを読み込み直す
     setState(() {});
   }
