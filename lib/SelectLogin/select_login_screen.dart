@@ -16,7 +16,19 @@ class SelectLoginScreen extends StatefulWidget {
   State<SelectLoginScreen> createState() => _SelectLoginScreenState();
 }
 
+String? loginCheck;
+
 class _SelectLoginScreenState extends State<SelectLoginScreen> {
+  void Check() async {
+    loginCheck = await SharedPreferenceHelper().getUserName();
+  }
+
+  @override
+  void initState() {
+    Check();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -24,7 +36,7 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
         builder: (context, snapshot) {
           return snapshot.connectionState == ConnectionState.waiting
               ? const Center(child: CircularProgressIndicator())
-              : snapshot.hasData
+              : loginCheck == 'LogIned'
                   ? MainPage(currenttab: 0)
                   : snapshot.hasError
                       ? const Center(
