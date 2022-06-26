@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eigo/profile/password_reset.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/profile/answers.dart';
@@ -71,6 +72,36 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: const ListTile(
                             leading: Icon(Icons.logout),
                             title: Text('ログアウト',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            tileColor: Colors.transparent,
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            PasswordReset(),
+                                        transitionDuration:
+                                            const Duration(seconds: 0),
+                                      ));
+                        },
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 0.5,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                          child: const ListTile(
+                            leading: Icon(Icons.lock_outline_rounded),
+                            title: Text('パスワード',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                 )),
