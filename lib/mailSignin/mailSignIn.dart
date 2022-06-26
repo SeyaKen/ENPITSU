@@ -218,14 +218,26 @@ class _SignInState extends State<mailSignIn> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    Column(
                       children: [
-                        TextButton(
-                          child: const Text('パスワードを忘れた場合'),
-                          onPressed: () {},
-                          style: TextButton.styleFrom(
-                            primary: const Color(0xff3B00FF),
+                        const SizedBox(height: 30),
+                        InkWell(
+                          onTap: () {},
+                          child: const Text(
+                            'パスワードを忘れた場合',
+                            style: TextStyle(
+                              color: Color(0xff3B00FF),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        InkWell(
+                          onTap: () {},
+                          child: const Text(
+                            'メールの認証が終わっていない場合',
+                            style: TextStyle(
+                              color: Color(0xff3B00FF),
+                            ),
                           ),
                         ),
                       ],
