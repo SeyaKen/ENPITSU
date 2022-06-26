@@ -70,7 +70,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           child: const ListTile(
-                            leading: Icon(Icons.logout),
+                            leading: Icon(
+                              Icons.logout,
+                              color: Colors.black,
+                            ),
                             title: Text('ログアウト',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -100,7 +103,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           child: const ListTile(
-                            leading: Icon(Icons.lock_outline_rounded),
+                            leading: Icon(
+                              Icons.lock_outline_rounded,
+                              color: Colors.black,
+                            ),
                             title: Text('パスワード',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,

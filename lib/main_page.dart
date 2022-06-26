@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
           },
           currentIndex: currenttab,
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color(0xff00376b),
+          selectedItemColor: Colors.black,
           backgroundColor: Colors.white,
           unselectedItemColor: Colors.grey,
           items: const <BottomNavigationBarItem>[
@@ -65,11 +65,11 @@ class _MainPageState extends State<MainPage> {
             ),
           ]),
       body: IndexedStack(
+        index: currenttab,
         children: const [
           HomeScreen(),
           ProfilePage(),
         ],
-        index: currenttab,
       ),
     );
   }
