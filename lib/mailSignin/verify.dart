@@ -46,7 +46,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
               Text(
-                  'noreply@studeng.firebaseapp.comから認証用のリンクを送りましたので、アクセスし登録を完了してください。',
+                  'noreply@eigo-224ae.firebaseapp.comから認証用のリンクを送りましたので、アクセスし登録を完了してください。',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   )),

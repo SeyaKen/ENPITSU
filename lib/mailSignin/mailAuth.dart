@@ -1,3 +1,4 @@
+import 'package:eigo/mailSignin/verify.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,14 @@ class AuthService {
                         ))
                   }
                 else
-                  {errorBox(context, 'メール認証が終わっていません。')}
+                  {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => const VerifyScreen(),
+                          transitionDuration: const Duration(seconds: 0),
+                        ))
+                  }
               });
     } catch (e) {
       print(e.toString());

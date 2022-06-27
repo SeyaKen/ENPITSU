@@ -105,7 +105,7 @@ class _SignInState extends State<PasswordReset> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      if (_formKey.currentState!.validate() && email == _auth.currentUser!.email) {
+                                      if (_formKey.currentState!.validate()) {
                                         _auth.sendPasswordResetEmail(email: email);
                                         Navigator.pop(context);
                                       } else {

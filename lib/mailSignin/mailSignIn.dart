@@ -1,3 +1,4 @@
+import 'package:eigo/profile/password_reset.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/SelectLogin/select_login_screen.dart';
 import 'package:eigo/mailSignin/mailAuth.dart';
@@ -222,19 +223,17 @@ class _SignInState extends State<mailSignIn> {
                       children: [
                         const SizedBox(height: 30),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) => PasswordReset(),
+                                  transitionDuration:
+                                      const Duration(seconds: 0),
+                                ));
+                          },
                           child: const Text(
                             'パスワードを忘れた場合',
-                            style: TextStyle(
-                              color: Color(0xff3B00FF),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        InkWell(
-                          onTap: () {},
-                          child: const Text(
-                            'メールの認証が終わっていない場合',
                             style: TextStyle(
                               color: Color(0xff3B00FF),
                             ),
