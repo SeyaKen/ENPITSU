@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eigo/SelectLogin/privacy_policy.dart';
+import 'package:eigo/SelectLogin/riyoukiyaku.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/mailSignin/mailAuth.dart';
 import 'package:eigo/mailSignin/mailAuthenticate.dart';
@@ -199,6 +202,62 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                                           ),
                                         ],
                                       )),
+                                ),
+                                const SizedBox(height: 50),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  child: RichText(
+                                      text: TextSpan(
+                                    style: const TextStyle(color: Colors.black),
+                                    children: [
+                                      const TextSpan(
+                                        text: '登録またはログインすることで、',
+                                      ),
+                                      TextSpan(
+                                        style:
+                                            const TextStyle(color: Colors.blue),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.push(
+                                                      context,
+                                                      PageRouteBuilder(
+                                                        pageBuilder: (_, __,
+                                                                ___) =>
+                                                            const Riyoukiyaku(),
+                                                        transitionDuration:
+                                                            const Duration(
+                                                                seconds: 0),
+                                                      ));
+                                          },
+                                        text: '利用規約',
+                                      ),
+                                      const TextSpan(
+                                        text: 'と',
+                                      ),
+                                      TextSpan(
+                                        style:
+                                            const TextStyle(color: Colors.blue),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            Navigator.push(
+                                                      context,
+                                                      PageRouteBuilder(
+                                                        pageBuilder: (_, __,
+                                                                ___) =>
+                                                            const PrivacyPolicy(),
+                                                        transitionDuration:
+                                                            const Duration(
+                                                                seconds: 0),
+                                                      ));
+                                          },
+                                        text: 'プライバシーポリシー',
+                                      ),
+                                      const TextSpan(
+                                        text: 'に同意したものと見なされます。',
+                                      ),
+                                    ],
+                                  )),
                                 ),
                               ],
                             ),
