@@ -45,6 +45,7 @@ dependencies:
   font_awesome_flutter:
   path_provider:
   shared_preferences:
+  url_launcher: ^6.1.4
 
 dev_dependencies:
   flutter_test:
