@@ -1,7 +1,4 @@
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   const PrivacyPolicy({super.key});
@@ -56,7 +53,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                     ),
                     const Center(
                         child: Text(
-                      '瀬谷　剣（以下、「当方」と言います）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。） における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。',
+                      'この利用規約（以下，「本規約」といいます。）は、EIGO（以下，「本アプリ」といいます。）がこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。本アプリをご利用の皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。',
                     )),
                     const SizedBox(
                       height: 10,
@@ -66,7 +63,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第1条（個人情報）',
+                            '第1条（適用）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -82,7 +79,12 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         child: Column(
                       children: const [
                         Text(
-                          '''「個人情報」とは，個人情報保護法にいう「個人情報」を指すものとし，生存する個人に関する情報であって，当該情報に含まれる氏名，生年月日，住所，電話番号，連絡先その他の記述等により特定の個人を識別できる情報及び容貌，指紋，声紋にかかるデータ，及び健康保険証の保険者番号などの当該情報単体から特定の個人を識別できる情報（個人識別情報）を指します。''',
+                          '''本規約は，ユーザーと本アプリとの間の本サービスの利用に関わる一切の関係に適用されるものとします。
+本アプリは本サービスに関し，本規約のほか，ご利用にあたってのルール等，各種の定め
+（以下，「個別規定」といいます。）をすることがあります。
+これら個別規定はその名称のいかんに関わらず，本規約の一部を構成するものとします。
+本規約の規定が前条の個別規定の規定と矛盾する場合には，個別規定において特段の定めなき限り，
+個別規定の規定が優先されるものとします。''',
                         ),
                       ],
                     )),
@@ -94,7 +96,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第2条（個人情報の収集方法）',
+                            '第2条（利用料金および支払方法）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -106,31 +108,11 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Center(
-                        child: RichText(
-                            text: TextSpan(
-                              style: const TextStyle(color: Colors.black),
-                      children: [
-                        const TextSpan(
-                          text:
-                              '当方は，ユーザーが利用登録をする際に入力されたメールアドレス・パスワードを保存します。 それと共に入力されたメモ情報や出席・欠席・遅刻回数等の情報も保存します。 また、当方では、利用状況を把握するためのツールとして「Google Analytics」を利用しています。「Google Analytics」から提供されるクッキー（Cookie）を使用していますが、匿名で収集されており、個人を特定するものではありません。 Google Analyticsにより収集されたデータは、Google社のプライバシーポリシーに基づいて管理されています。',
+                    const Center(
+                        child: Text(
+                              '本サービスは無料で利用できるため本社からユーザーに料金を請求することは一切ありません。',
                         ),
-                        TextSpan(
-                          style: const TextStyle(color: Colors.blue),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                                await launch(
-                                    "");
-                            },
-                          text:
-                              'Google Analyticsの 利用規約・ プライバシーポリシー',
-                        ),
-                        const TextSpan(
-                          text:
-                              'についてはホームページでご確認ください。',
-                        ),
-                      ],
-                    ))),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -139,7 +121,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第3条（個人情報を収集・利用する目的）',
+                            '第3条（禁止事項）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -155,7 +137,29 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         child: Column(
                       children: const [
                         Text(
-                          '''当方が個人情報を収集・利用する目的は，以下のとおりです。 当方サービスの提供・運営のため''',
+                          '''ユーザーは，本サービスの利用にあたり，以下の行為をしてはなりません。
+・法令または公序良俗に違反する行為 ・犯罪行為に関連する行為
+・本アプリ，本サービスの他のユーザー，または第三者のサーバーまたはネットワークの機能を破壊したり，妨害したりする行為
+・本アプリのサービスの運営を妨害するおそれのある行為
+・他のユーザーに関する個人情報等を収集または蓄積する行為
+・不正アクセスをし，またはこれを試みる行為
+・他のユーザーに成りすます行為
+・本アプリのサービスに関連して，反社会的勢力に対して直接または間接に利益を供与する行為
+・本アプリ，本サービスの他のユーザーまたは第三者の知的財産権，肖像権，プライバシー，名誉その他の権利または利益を侵害する行為
+・以下の表現を含み，または含むと本アプリが判断する内容を本サービス上に投稿し，または送信する行為
+・過度に暴力的な表現 ・露骨な性的表現
+・人種，国籍，信条，性別，社会的身分，門地等による差別につながる表現
+・自殺，自傷行為，薬物乱用を誘引または助長する表現
+・その他反社会的な内容を含み他人に不快感を与える表現
+・以下を目的とし，または目的とすると本アプリが判断する行為
+・営業，宣伝，広告，勧誘，その他営利を目的とする行為（本アプリの認めたものを除きます。）
+・性行為やわいせつな行為を目的とする行為
+・面識のない異性との出会いや交際を目的とする行為
+・他のユーザーに対する嫌がらせや誹謗中傷を目的とする行為
+・本アプリ，本サービスの他のユーザー，または第三者に不利益，損害または不快感を与えることを目的とする行為
+・その他本サービスが予定している利用目的と異なる目的で本サービスを利用する行為
+・宗教活動または宗教団体への勧誘行為
+・その他，本アプリが不適切と判断する行為''',
                         ),
                       ],
                     )),
@@ -167,7 +171,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第4条（利用目的の変更）',
+                            '第4条（本サービスの提供の停止等）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -183,21 +187,12 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         child: Column(
                       children: const [
                         Text(
-                          '''1.当方は，次に掲げる場合を除いて，あらかじめユーザーの同意を得ることなく，第三者に個人情報を提供することはありません。ただし，個人情報保護法その他の法令で認められる場合を除きます。
-1.人の生命，身体または財産の保護のために必要がある場合であって，本人の同意を得ることが困難であるとき
-2.公衆衛生の向上または児童の健全な育成の推進のために特に必要がある場合であって，本人の同意を得ることが困難であるとき
-3.国の機関もしくは地方公共団体またはその委託を受けた者が法令の定める事務を遂行することに対して協力する必要がある場合であって，本人の同意を得ることにより当該事務の遂行に支障を及ぼすおそれがあるとき
-4.予め次の事項を告知あるいは公表し，かつ当方が個人情報保護委員会に届出をしたとき
-1.利用目的に第三者への提供を含むこと
-2.利用目的に第三者への提供を含むこと
-3.第三者に提供されるデータの項目
-4.第三者への提供の手段または方法
-5.本人の求めに応じて個人情報の第三者への提供を停止すること
-6.本人の求めを受け付ける方法
-2.前項の定めにかかわらず，次に掲げる場合には，当該情報の提供先は第三者に該当しないものとします。
-1.当方が利用目的の達成に必要な範囲内において個人情報の取扱いの全部または一部を委託する場合
-2.合併その他の事由による事業の承継に伴って個人情報が提供される場合
-3.個人情報を特定の者との間で共同して利用する場合であって，その旨並びに共同して利用される個人情報の項目，共同して利用する者の範囲，利用する者の利用目的および当該個人情報の管理について責任を有する者の氏名または名称について，あらかじめ本人に通知し，または本人が容易に知り得る状態に置いた場合''',
+                          '''本アプリは，以下のいずれかの事由があると判断した場合，ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
+本サービスにかかるコンピュータシステムの保守点検または更新を行う場合
+地震，落雷，火災，停電または天災などの不可抗力により，本サービスの提供が困難となった場合
+コンピュータまたは通信回線等が事故により停止した場合
+その他，本アプリが本サービスの提供が困難と判断した場合
+本アプリは，本サービスの提供の停止または中断により，ユーザーまたは第三者が被ったいかなる不利益または損害についても，一切の責任を負わないものとします。''',
                         ),
                       ],
                     )),
@@ -209,7 +204,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第5条（個人情報の開示）',
+                            '第5条（著作権）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -225,11 +220,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         child: Column(
                       children: const [
                         Text(
-                          '''1.当方は，本人から個人情報の開示を求められたときは，本人に対し，遅滞なくこれを開示します。ただし，開示することにより次のいずれかに該当する場合は，その全部または一部を開示しないこともあり，開示しない決定をした場合には，その旨を遅滞なく通知します。
-1.本人または第三者の生命，身体，財産その他の権利利益を害するおそれがある場合
-2.当方の業務の適正な実施に著しい支障を及ぼすおそれがある場合
-3.その他法令に違反することとなる場合
-2.前項の定めにかかわらず，履歴情報および特性情報などの個人情報以外の情報については，原則として開示いたしません。
+                          '''ユーザーは，自ら著作権等の必要な知的財産権を有するか，または必要な権利者の許諾を得た文章，画像や映像等の情報に関してのみ，本サービスを利用し，投稿ないしアップロードすることができるものとします。
+ユーザーが本サービスを利用して投稿ないしアップロードした文章，画像，映像等の著作権については，当該ユーザーその他既存の権利者に留保されるものとします。ただし，本アプリは，本サービスを利用して投稿ないしアップロードされた文章，画像，映像等について，本サービスの改良，品質の向上，または不備の是正等ならびに本サービスの周知宣伝等に必要な範囲で利用できるものとし，ユーザーは，この利用に関して，著作者人格権を行使しないものとします。
+前項本文の定めるものを除き，本サービスおよび本サービスに関連する一切の情報についての著作権およびその他の知的財産権はすべて本アプリまたは本アプリにその利用を許諾した権利者に帰属し，ユーザーは無断で複製，譲渡，貸与，翻訳，改変，転載，公衆送信（送信可能化を含みます。），伝送，配布，出版，営業使用等をしてはならないものとします。
 ''',
                         ),
                       ],
@@ -242,7 +235,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第6条（個人情報の訂正および削除）',
+                            '第6条（利用制限および登録抹消）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -258,9 +251,14 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         child: Column(
                       children: const [
                         Text(
-                          '''1.ユーザーは，当方の保有する自己の個人情報が誤った情報である場合には，当方が定める手続きにより，当方に対して個人情報の訂正，追加または削除（以下，「訂正等」といいます。）を請求することができます。
-2.当方は，ユーザーから前項の請求を受けてその請求に応じる必要があると判断した場合には，遅滞なく，当該個人情報の訂正等を行うものとします。
-3.当方は，前項の規定に基づき訂正等を行った場合，または訂正等を行わない旨の決定をしたときは遅滞なく，これをユーザーに通知します。
+                          '''本アプリは，ユーザーが以下のいずれかに該当する場合には，事前の通知なく，投稿データを削除し，ユーザーに対して本サービスの全部もしくは一部の利用を制限しまたはユーザーとしての登録を抹消することができるものとします。
+本規約のいずれかの条項に違反した場合
+登録事項に虚偽の事実があることが判明した場合
+本アプリからの連絡に対し，一定期間返答がない場合
+本サービスについて，最終の利用から一定期間利用がない場合
+その他，本アプリが本サービスの利用を適当でないと判断した場合
+前項各号のいずれかに該当した場合，ユーザーは，当然に本アプリに対する一切の債務について期限の利益を失い，その時点において負担する一切の債務を直ちに一括して弁済しなければなりません。
+本アプリは，本条に基づき本アプリが行った行為によりユーザーに生じた損害について，一切の責任を負いません。
 ''',
                         ),
                       ],
@@ -273,7 +271,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第7条（個人情報の利用停止等）',
+                            '第7条（保証の否認および免責事項）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -289,10 +287,10 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                         child: Column(
                       children: [
                         const Text(
-                          '''1.当方は，本人から，個人情報が，利用目的の範囲を超えて取り扱われているという理由，または不正の手段により取得されたものであるという理由により，その利用の停止または消去（以下，「利用停止等」といいます。）を求められた場合には，遅滞なく必要な調査を行います。
-2.前項の調査結果に基づき，その請求に応じる必要があると判断した場合には，遅滞なく，当該個人情報の利用停止等を行います。
-3.当方は，前項の規定に基づき利用停止等を行った場合，または利用停止等を行わない旨の決定をしたときは，遅滞なく，これをユーザーに通知します。
-4.前2項にかかわらず，利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって，ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は，この代替策を講じるものとします。
+                          '''本アプリは，本サービスに事実上または法律上の瑕疵（安全性，信頼性，正確性，完全性，有効性，特定の目的への適合性，セキュリティなどに関する欠陥，エラーやバグ，権利侵害などを含みます。）がないことを明示的にも黙示的にも保証しておりません。
+本アプリは，本サービスに起因してユーザーに生じたあらゆる損害について一切の責任を負いません。ただし，本サービスに関する本アプリとユーザーとの間の契約（本規約を含みます。）が消費者契約法に定める消費者契約となる場合，この免責規定は適用されません。
+前項ただし書に定める場合であっても，本アプリは，本アプリの過失（重過失を除きます。）による債務不履行または不法行為によりユーザーに生じた損害のうち特別な事情から生じた損害（本アプリまたはユーザーが損害発生につき予見し，または予見し得た場合を含みます。）について一切の責任を負いません。また，本アプリの過失（重過失を除きます。）による債務不履行または不法行為によりユーザーに生じた損害の賠償は，ユーザーから当該損害が発生した月に受領した利用料の額を上限とします。
+本アプリは，本サービスに関して，ユーザーと他のユーザーまたは第三者との間において生じた取引，連絡または紛争等について一切責任を負いません。
 ''',
                         ),
                         Row(
@@ -300,7 +298,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                           children: const [
                             Flexible(
                               child: Text(
-                                '第8条（プライバシーポリシーの変更）',
+                                '第8条（サービス内容の変更等）',
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -316,8 +314,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                             child: Column(
                           children: const [
                             Text(
-                              '''1.本ポリシーの内容は，法令その他本ポリシーに別段の定めのある事項を除いて，ユーザーに通知することなく，変更することができるものとします。
-2.当方が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします''',
+                              '''本アプリは，ユーザーに通知することなく，本サービスの内容を変更しまたは本サービスの提供を中止することができるものとし，これによってユーザーに生じた損害について一切の責任を負いません。''',
                             ),
                           ],
                         )),
@@ -331,7 +328,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       children: const [
                         Flexible(
                           child: Text(
-                            '第9条（お問い合わせ窓口）',
+                            '第9条（利用規約の変更）',
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -355,20 +352,118 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       height: 10,
                     ),
                     Row(
-                      children: [
-                        InkWell(
-                            onTap: () async {
-                              if (await canLaunch("")) {
-                                await launch(
-                                    "");
-                              }
-                            },
-                            child: const Text(
-                              '「お問い合わせ窓口」はこちら',
-                              style: TextStyle(color: Colors.blue),
-                            )),
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Flexible(
+                          child: Text(
+                            '第10条（個人情報の取扱い）',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ],
-                    )
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                        child: Column(
+                      children: const [
+                        Text(
+                          '''本アプリは，本サービスの利用によって取得する個人情報については，本アプリ「プライバシーポリシー」に従い適切に取り扱うものとします。''',
+                        ),
+                      ],
+                    )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Flexible(
+                          child: Text(
+                            '第11条（通知または連絡）',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                        child: Column(
+                      children: const [
+                        Text(
+                          '''ユーザーと本アプリとの間の通知または連絡は，本アプリの定める方法によって行うものとします。本アプリは,ユーザーから,本アプリが別途定める方式に従った変更届け出がない限り,現在登録されている連絡先が有効なものとみなして当該連絡先へ通知または連絡を行い,これらは,発信時にユーザーへ到達したものとみなします。''',
+                        ),
+                      ],
+                    )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Flexible(
+                          child: Text(
+                            '第12条（権利義務の譲渡の禁止）',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                        child: Column(
+                      children: const [
+                        Text(
+                          '''ユーザーは，本アプリの書面による事前の承諾なく，利用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し，または担保に供することはできません。''',
+                        ),
+                      ],
+                    )),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Flexible(
+                          child: Text(
+                            '第13条（準拠法・裁判管轄）',
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Center(
+                        child: Column(
+                      children: const [
+                        Text(
+                          '''本規約の解釈にあたっては，日本法を準拠法とします。
+本サービスに関して紛争が生じた場合には，本アプリの本店所在地を管轄する裁判所を専属的合意管轄とします。''',
+                        ),
+                      ],
+                    )),
+                    const SizedBox(
+                      height: 100,
+                    ),
                   ],
                 ))));
   }
