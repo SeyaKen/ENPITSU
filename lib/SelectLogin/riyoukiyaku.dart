@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class PrivacyPolicy extends StatefulWidget {
-  const PrivacyPolicy({super.key});
+class Riyoukiyaku extends StatefulWidget {
+  const Riyoukiyaku({super.key});
 
   @override
-  State<PrivacyPolicy> createState() => _PrivacyPolicyState();
+  State<Riyoukiyaku> createState() => _RiyoukiyakuState();
 }
 
-class _PrivacyPolicyState extends State<PrivacyPolicy> {
+class _RiyoukiyakuState extends State<Riyoukiyaku> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
