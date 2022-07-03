@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   const PrivacyPolicy({super.key});
@@ -104,11 +106,42 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Center(
-                    child: Text(
-                      'EIGOは，ユーザーが利用登録をする際に入力されたメールアドレス・パスワードを保存します。 それと共に入力されたメモ情報や出席・欠席・遅刻回数等の情報も保存します。 また、EIGOでは、利用状況を把握するためのツールとして「Google Analytics」を利用しています。「Google Analytics」から提供されるクッキー（Cookie）を使用していますが、匿名で収集されており、個人を特定するものではありません。 Google Analyticsにより収集されたデータは、Google社のプライバシーポリシーに基づいて管理されています。Google Analyticsの 利用規約・ プライバシーポリシーについてはホームページでご確認ください。',
-                    ),
-                  ),
+                  Center(
+                      child: RichText(
+                    text: TextSpan(
+                        style: const TextStyle(color: Colors.black),
+                        children: [
+                          const TextSpan(
+                            text:
+                                'EIGOは，ユーザーが利用登録をする際に入力されたメールアドレス・パスワードを保存します。 それと共に入力されたメモ情報や出席・欠席・遅刻回数等の情報も保存します。 また、EIGOでは、利用状況を把握するためのツールとして「Google Analytics」を利用しています。「Google Analytics」から提供されるクッキー（Cookie）を使用していますが、匿名で収集されており、個人を特定するものではありません。 Google Analyticsにより収集されたデータは、Google社の',
+                          ),
+                          TextSpan(
+                            style: const TextStyle(color: Colors.blue),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                await launch(
+                                    "https://marketingplatform.google.com/about/analytics/terms/jp/");
+                              },
+                            text: '利用規約',
+                          ),
+                          const TextSpan(
+                            text: '・',
+                          ),
+                          TextSpan(
+                            style: const TextStyle(color: Colors.blue),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                await launch(
+                                    "https://policies.google.com/privacy?hl=ja");
+                              },
+                            text: 'プライバシーポリシー',
+                          ),
+                          const TextSpan(
+                            text:
+                                'に基づいて管理されています。Google Analyticsの ・ プライバシーポリシーについてはホームページでご確認ください。',
+                          ),
+                        ]),
+                  )),
                   const SizedBox(
                     height: 10,
                   ),
