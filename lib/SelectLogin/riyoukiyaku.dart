@@ -109,9 +109,9 @@ class _RiyoukiyakuState extends State<Riyoukiyaku> {
                       height: 10,
                     ),
                     const Center(
-                        child: Text(
-                              '本サービスは無料で利用できるため本社からユーザーに料金を請求することは一切ありません。',
-                        ),
+                      child: Text(
+                        '本サービスは無料で利用できるため本社からユーザーに料金を請求することは一切ありません。',
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -462,9 +462,12 @@ class _RiyoukiyakuState extends State<Riyoukiyaku> {
                       ],
                     )),
                     const SizedBox(
-                      height: 100,
+                      height: 0,
                     ),
                   ],
-                ))));
+                )
+              )
+            )
+          );
   }
 }

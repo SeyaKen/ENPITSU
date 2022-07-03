@@ -380,15 +380,27 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                       child: Column(
                     children: const [
                       Text(
-                        '''本アプリは，必要と判断した場合には，ユーザーに通知することなくいつでも本規約を変更することができるものとします。なお，本規約の変更後，本サービスの利用を開始した場合には，当該ユーザーは変更後の規約に同意したものとみなします。
-
-「お問い合わせ窓口」はこちら''',
+                        '''本アプリは，必要と判断した場合には，ユーザーに通知することなくいつでも本規約を変更することができるものとします。なお，本規約の変更後，本サービスの利用を開始した場合には，当該ユーザーは変更後の規約に同意したものとみなします。''',
                       ),
                     ],
                   )),
                   const SizedBox(
                     height: 10,
                   ),
+                  Row(
+                      children: [
+                        InkWell(
+                            onTap: () async {
+                              if (await canLaunch("https://forms.gle/Gu2vC8NH14A2WRcEA")) {
+                                await launch("https://forms.gle/Gu2vC8NH14A2WRcEA");
+                              }
+                            },
+                            child: const Text(
+                              '「お問い合わせ窓口」はこちら',
+                              style: TextStyle(color: Colors.blue),
+                            )),
+                      ],
+                    )
                 ]))));
   }
 }

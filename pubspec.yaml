@@ -46,6 +46,9 @@ dependencies:
   path_provider:
   shared_preferences:
   url_launcher: ^6.1.4
+  firebase_remote_config: ^0.10.0
+  pub_semver: ^2.0.0
+  package_info: ^2.0.1
 
 dev_dependencies:
   flutter_test:

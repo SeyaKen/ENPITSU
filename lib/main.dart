@@ -1,3 +1,4 @@
+import 'package:eigo/updater.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/SplashScreen/splash_screen.dart';
@@ -16,10 +17,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GoogleSignInProvider(),
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        home: MySplashScreen(),
+        home: Stack(children: [
+          const MySplashScreen(),
+          Updater(
+            appStoreUrl: 'AppストアのURL',
+            playStoreUrl: 'PlayストアのURL',
+          ),
+        ]),
       ),
     );
   }
