@@ -166,6 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           fontSize: 20,
                                         ),
                                         overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
                                       ),
                                     ),
                                     SizedBox(
