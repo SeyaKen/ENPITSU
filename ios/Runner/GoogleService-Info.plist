@@ -19,15 +19,19 @@
 	<key>STORAGE_BUCKET</key>
 	<string>eigo-224ae.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
+	<key>CFBundleIdentifier</key>
+	<string></string>
+	<key>GADApplicationidentifier</key>
+	<string>ca-app-pub-2820998332028532/2664245992</string>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:98014109771:ios:018712946e96da81c12dce</string>
 </dict>
