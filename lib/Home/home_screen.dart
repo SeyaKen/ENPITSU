@@ -249,17 +249,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         snapshot1) {
                                                       return snapshot1
                                                               .hasData
-                                                          ? Text(
-                                                              snapshot1
-                                                                      .data!
-                                                                      .docs[
-                                                                  0]['name'],
-                                                              style:
-                                                                  const TextStyle(
-                                                                fontSize:
-                                                                    10,
+                                                          ? SizedBox(
+                                                            width: MediaQuery.of(context).size.width * 0.8,
+                                                            child: Text(
+                                                                snapshot1
+                                                                        .data!
+                                                                        .docs[
+                                                                    0]['name'],
+                                                                overflow: TextOverflow.ellipsis,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  fontSize:
+                                                                      10,
+                                                                ),
                                                               ),
-                                                            )
+                                                          )
                                                           : const Text('');
                                                     }),
                                                 const SizedBox(height: 5),
