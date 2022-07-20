@@ -166,17 +166,20 @@ class _QuestionsState extends State<Questions> {
                                                   builder:
                                                       (context, snapshot1) {
                                                     return snapshot1.hasData
-                                                        ? Text(
-                                                            snapshot1.data!
-                                                                    .docs[0]
-                                                                ['name'],
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 10,
+                                                        ? SizedBox(
+                                                            width: MediaQuery.of(context).size.width * 0.8,
+                                                          child: Text(
+                                                              snapshot1.data!
+                                                                      .docs[0]
+                                                                  ['name'],
+                                                                overflow: TextOverflow.ellipsis,
+                                                              style:
+                                                                  const TextStyle(
+                                                                fontSize: 10,
+                                                              ),
+                                                              maxLines: 1,
                                                             ),
-                                                            maxLines: 1,
-                                                            overflow: TextOverflow.ellipsis,
-                                                          )
+                                                        )
                                                         : const Text('');
                                                   }),
                                               const SizedBox(height: 5),

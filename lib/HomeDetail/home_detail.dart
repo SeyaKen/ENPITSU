@@ -231,11 +231,15 @@ class _HomeDetailState extends State<HomeDetail> {
                                                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                                                       children: [
                                                                                         const SizedBox(height: 5),
-                                                                                        Text(
-                                                                                          snap7.hasData ? snap7.data!.docs[0]['name'] : '',
-                                                                                          style: const TextStyle(
-                                                                                            fontSize: 12,
-                                                                                            fontWeight: FontWeight.bold,
+                                                                                        SizedBox(
+                                                                                          width: MediaQuery.of(context).size.width * 0.5,
+                                                                                          child: Text(
+                                                                                            snap7.hasData ? snap7.data!.docs[0]['name'] : '',
+                                                                                            style: const TextStyle(
+                                                                                              fontSize: 12,
+                                                                                              fontWeight: FontWeight.bold,
+                                                                                            ),
+                                                                                            overflow: TextOverflow.ellipsis,
                                                                                           ),
                                                                                         ),
                                                                                         const SizedBox(height: 5),
@@ -576,10 +580,14 @@ class _HomeDetailState extends State<HomeDetail> {
                                                                             stream:
                                                                                 FirebaseFirestore.instance.collection('users').where('uid', isEqualTo: askerId).snapshots(),
                                                                             builder: (context, snapshot1) {
-                                                                              return Text(
-                                                                                snapshot1.hasData ? snapshot1.data!.docs[0]['name'] : '',
-                                                                                style: const TextStyle(
-                                                                                  fontSize: 12,
+                                                                              return SizedBox(
+                                                                                width: MediaQuery.of(context).size.width * 0.8,
+                                                                                child: Text(
+                                                                                  snapshot1.hasData ? snapshot1.data!.docs[0]['name'] : '',
+                                                                                  style: const TextStyle(
+                                                                                    fontSize: 12,
+                                                                                  ),
+                                                                                  overflow: TextOverflow.ellipsis,
                                                                                 ),
                                                                               );
                                                                             }),
