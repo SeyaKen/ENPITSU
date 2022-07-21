@@ -1,3 +1,4 @@
+import 'package:eigo/ad_state.dart';
 import 'package:eigo/updater.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   final initFuture = MobileAds.instance.initialize();
-  runApp(const MyApp());
+  final adState = AdState(initFuture);
+  runApp(
+    Provider.value(
+      value: adState,
+      builder: (context, child) => const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -30,8 +30,6 @@
 	<true/>
 	<key>CFBundleIdentifier</key>
 	<string></string>
-	<key>GADApplicationidentifier</key>
-	<string>ca-app-pub-2820998332028532/2664245992</string>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:98014109771:ios:018712946e96da81c12dce</string>
 </dict>

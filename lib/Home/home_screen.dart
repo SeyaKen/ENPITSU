@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eigo/ad_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/HomeDetail/home_detail.dart';
 import 'package:eigo/Questions/questions_screen.dart';
 import 'package:eigo/services/database.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Stream<QuerySnapshot<Object?>>? questionsListsStream, searchStateStream;
   final ScrollController _scrollController = ScrollController();
   int _currentMax = 20;
+  BannerAd? banner;
 
   getHomeLists() async {
     questionsListsStream = DatabaseService(uid).dataCollect();
@@ -38,6 +42,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    super.initState();
+    final adState = Provider.of<AdState>(context);
+    adState.initialization.then((status) {
+      setState(() {
+        banner = BannerAd(
+          adUnitId: adState.bannerAdUnitId,
+          size: AdSize.banner,
+          request: const AdRequest(),
+          listener: adState.,
+        );
+      });
+    });
     onScreenLoaded();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
@@ -45,7 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
         _getMoreData();
       }
     });
-    super.initState();
   }
 
   @override
@@ -110,184 +125,202 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           )),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: searchStateStream ?? questionsListsStream,
-          builder: (context, snapshot) {
-            return snapshot.hasData
-                ? ListView.builder(
-                    controller: _scrollController,
-                    itemCount: snapshot.data!.docs.length + 1,
-                    itemBuilder: (BuildContext context, int index) {
-                      return index == snapshot.data!.docs.length
-                          ? const CupertinoActivityIndicator()
-                          : InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) => HomeDetail(
-                                      articleId:
-                                          snapshot.data!.docs[index].id,
-                                      askerId: snapshot.data!.docs[index]
-                                          ['asker'],
-                                      fromWhere: 'home',
+      body: Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 50,
+            child: AdWidget(
+              ad: banner!,
+            ),
+          ),
+          StreamBuilder<QuerySnapshot>(
+              stream: searchStateStream ?? questionsListsStream,
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? ListView.builder(
+                        controller: _scrollController,
+                        itemCount: snapshot.data!.docs.length + 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          return index == snapshot.data!.docs.length
+                              ? const CupertinoActivityIndicator()
+                              : InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) => HomeDetail(
+                                          articleId:
+                                              snapshot.data!.docs[index].id,
+                                          askerId: snapshot.data!.docs[index]
+                                              ['asker'],
+                                          fromWhere: 'home',
+                                        ),
+                                        transitionDuration:
+                                            const Duration(seconds: 0),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 140,
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                      top: BorderSide(
+                                          width: 0.5, color: Colors.grey),
+                                    )),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 13, vertical: 15),
+                                    // color: Colors.white,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.9,
+                                          child: Text(
+                                            snapshot.data!.docs[index]
+                                                ['caption'],
+                                            style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.9,
+                                          child: Text(
+                                            snapshot.data!.docs[index]
+                                                ['questionList'][0],
+                                            style: const TextStyle(),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        Row(children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(150.0),
+                                            child: SizedBox(
+                                              width: 30,
+                                              height: 30,
+                                              child: StreamBuilder<
+                                                      QuerySnapshot>(
+                                                  stream: FirebaseFirestore
+                                                      .instance
+                                                      .collection('users')
+                                                      .where('uid',
+                                                          isEqualTo: snapshot
+                                                                  .data!
+                                                                  .docs[index]
+                                                              ['asker'])
+                                                      .snapshots(),
+                                                  builder:
+                                                      (context, snapshot0) {
+                                                    return snapshot0.hasData
+                                                        ? Image.network(
+                                                            snapshot0.data!.docs[
+                                                                            0][
+                                                                        'ProfilePicture'] ==
+                                                                    ''
+                                                                ? 'https://firebasestorage.googleapis.com/v0/b/eigo-224ae.appspot.com/o/44884218_345707102882519_2446069589734326272_n.jpeg?alt=media&token=9cdb200e-9d19-4657-a861-711f87ad10f4'
+                                                                : snapshot0
+                                                                        .data!
+                                                                        .docs[0]
+                                                                    [
+                                                                    'ProfilePicture'],
+                                                            fit: BoxFit.cover,
+                                                          )
+                                                        : Image.network(
+                                                            'https://firebasestorage.googleapis.com/v0/b/eigo-224ae.appspot.com/o/44884218_345707102882519_2446069589734326272_n.jpeg?alt=media&token=9cdb200e-9d19-4657-a861-711f87ad10f4',
+                                                            fit: BoxFit.cover,
+                                                          );
+                                                  }),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    StreamBuilder<
+                                                            QuerySnapshot>(
+                                                        stream: FirebaseFirestore
+                                                            .instance
+                                                            .collection('users')
+                                                            .where('uid',
+                                                                isEqualTo: snapshot
+                                                                        .data!
+                                                                        .docs[index]
+                                                                    ['asker'])
+                                                            .snapshots(),
+                                                        builder: (context,
+                                                            snapshot1) {
+                                                          return snapshot1
+                                                                  .hasData
+                                                              ? SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      0.8,
+                                                                  child: Text(
+                                                                    snapshot1
+                                                                            .data!
+                                                                            .docs[0]
+                                                                        [
+                                                                        'name'],
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      fontSize:
+                                                                          10,
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              : const Text('');
+                                                        }),
+                                                    const SizedBox(height: 5),
+                                                    Text(
+                                                      snapshot.data!
+                                                          .docs[index]['date']
+                                                          .toDate()
+                                                          .toString()
+                                                          .substring(0, 16),
+                                                      style: const TextStyle(
+                                                        fontSize: 10,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ]),
+                                        ]),
+                                      ],
                                     ),
-                                    transitionDuration:
-                                        const Duration(seconds: 0),
                                   ),
                                 );
-                              },
-                              child: Container(
-                                height: 140,
-                                decoration: const BoxDecoration(
-                                    border: Border(
-                                  top: BorderSide(
-                                      width: 0.5, color: Colors.grey),
-                                )),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 13, vertical: 15),
-                                // color: Colors.white,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: MediaQuery.of(context)
-                                              .size
-                                              .width *
-                                          0.9,
-                                      child: Text(
-                                        snapshot.data!.docs[index]
-                                            ['caption'],
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                        maxLines: 1,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context)
-                                              .size
-                                              .width *
-                                          0.9,
-                                      child: Text(
-                                        snapshot.data!.docs[index]
-                                            ['questionList'][0],
-                                        style: const TextStyle(),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                    Row(children: [
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(150.0),
-                                        child: SizedBox(
-                                          width: 30,
-                                          height: 30,
-                                          child: StreamBuilder<
-                                                  QuerySnapshot>(
-                                              stream: FirebaseFirestore
-                                                  .instance
-                                                  .collection('users')
-                                                  .where('uid',
-                                                      isEqualTo: snapshot
-                                                              .data!
-                                                              .docs[index]
-                                                          ['asker'])
-                                                  .snapshots(),
-                                              builder:
-                                                  (context, snapshot0) {
-                                                return snapshot0.hasData
-                                                    ? Image.network(
-                                                        snapshot0.data!.docs[
-                                                                        0][
-                                                                    'ProfilePicture'] ==
-                                                                ''
-                                                            ? 'https://firebasestorage.googleapis.com/v0/b/eigo-224ae.appspot.com/o/44884218_345707102882519_2446069589734326272_n.jpeg?alt=media&token=9cdb200e-9d19-4657-a861-711f87ad10f4'
-                                                            : snapshot0
-                                                                    .data!
-                                                                    .docs[0]
-                                                                [
-                                                                'ProfilePicture'],
-                                                        fit: BoxFit.cover,
-                                                      )
-                                                    : Image.network(
-                                                        'https://firebasestorage.googleapis.com/v0/b/eigo-224ae.appspot.com/o/44884218_345707102882519_2446069589734326272_n.jpeg?alt=media&token=9cdb200e-9d19-4657-a861-711f87ad10f4',
-                                                        fit: BoxFit.cover,
-                                                      );
-                                              }),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                StreamBuilder<
-                                                        QuerySnapshot>(
-                                                    stream: FirebaseFirestore
-                                                        .instance
-                                                        .collection('users')
-                                                        .where('uid',
-                                                            isEqualTo: snapshot
-                                                                    .data!
-                                                                    .docs[index]
-                                                                ['asker'])
-                                                        .snapshots(),
-                                                    builder: (context,
-                                                        snapshot1) {
-                                                      return snapshot1
-                                                              .hasData
-                                                          ? SizedBox(
-                                                            width: MediaQuery.of(context).size.width * 0.8,
-                                                            child: Text(
-                                                                snapshot1
-                                                                        .data!
-                                                                        .docs[
-                                                                    0]['name'],
-                                                                overflow: TextOverflow.ellipsis,
-                                                                style:
-                                                                    const TextStyle(
-                                                                  fontSize:
-                                                                      10,
-                                                                ),
-                                                              ),
-                                                          )
-                                                          : const Text('');
-                                                    }),
-                                                const SizedBox(height: 5),
-                                                Text(
-                                                  snapshot.data!
-                                                      .docs[index]['date']
-                                                      .toDate()
-                                                      .toString()
-                                                      .substring(0, 16),
-                                                  style: const TextStyle(
-                                                    fontSize: 10,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ]),
-                                    ]),
-                                  ],
-                                ),
-                              ),
-                            );
-                    })
-                : const Center(child: CircularProgressIndicator());
-          }),
+                        })
+                    : const Center(child: CircularProgressIndicator());
+              }),
+        ],
+      ),
       floatingActionButton: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
