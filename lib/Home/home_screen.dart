@@ -60,15 +60,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    final adState = Provider.of<AdState>(context);
+    final adState = Provider.of<AdState>(context, listen: false);
     adState.initialization.then((status) {
       setState(() {
         banner = BannerAd(
           adUnitId: adState.bannerAdUnitId,
           size: AdSize.banner,
           request: const AdRequest(),
-          listener: const  BannerAdListener(),
-        );
+          listener: const BannerAdListener(),
+        )..load();
       });
     });
     onScreenLoaded();
@@ -145,17 +145,19 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: AdWidget(
-              ad: banner!,
-            ),
-          ),
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              child: banner != null
+                  ? AdWidget(
+                      ad: banner!,
+                    )
+                  : const SizedBox()),
           StreamBuilder<QuerySnapshot>(
               stream: searchStateStream ?? questionsListsStream,
               builder: (context, snapshot) {
                 return snapshot.hasData
                     ? ListView.builder(
+                        shrinkWrap: true,
                         controller: _scrollController,
                         itemCount: snapshot.data!.docs.length + 1,
                         itemBuilder: (BuildContext context, int index) {

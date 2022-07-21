@@ -8,6 +8,11 @@ class AdState {
   AdState(this.initialization);
 
   String get bannerAdUnitId => Platform.isAndroid
-      ? 'ca-app-pub-2820998332028532/2664245992'
-      : 'ca-app-pub-2820998332028532/2809933268';
+    // テストモード
+    // ? 'ca-app-pub-3940256099942544/2934735716'
+    // : 'ca-app-pub-3940256099942544/2934735716';
+
+    // 本番モード
+    ? 'ca-app-pub-2820998332028532/2664245992'
+    : 'ca-app-pub-2820998332028532/2809933268';
 }
