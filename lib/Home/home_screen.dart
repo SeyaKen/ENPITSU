@@ -85,62 +85,51 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
-          toolbarHeight: 100,
+          toolbarHeight: 60,
           backgroundColor: const Color(0xfffafafa),
           elevation: 0,
-          title: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 30),
-                Container(
-                  height: MediaQuery.of(context).size.width * 0.1,
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  alignment: Alignment.bottomCenter,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    color: Colors.grey[300],
-                  ),
-                  child: TextField(
-                      onChanged: (text) async {
-                        List preForSearch = [];
-                        if (text.length > 1) {
-                          for (int i = 0; i < text.length - 1; i++) {
-                            if (!preForSearch
-                                .contains(text.substring(i, i + 2))) {
-                              preForSearch.add(text.substring(i, i + 2));
-                            }
-                          }
-                          searchStateStream = await DatabaseService(uid)
-                              .searchDataCollect(preForSearch);
-                          setState(() {});
-                        } else {
-                          searchStateStream = null;
-                          setState(() {});
-                        }
-                      },
-                      textAlignVertical: TextAlignVertical.center,
-                      style: const TextStyle(
-                        fontSize: 19,
-                      ),
-                      decoration: const InputDecoration(
-                          prefixIcon: Icon(
-                            Icons.search,
-                            size: 19,
-                          ),
-                          isDense: true,
-                          border: InputBorder.none,
-                          hintText: '検索',
-                          hintStyle: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 19,
-                          ))),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-              ],
+          title: Container(
+            height: MediaQuery.of(context).size.width * 0.1,
+            width: MediaQuery.of(context).size.width * 0.95,
+            alignment: Alignment.bottomCenter,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              color: Colors.grey[300],
             ),
+            child: TextField(
+                onChanged: (text) async {
+                  List preForSearch = [];
+                  if (text.length > 1) {
+                    for (int i = 0; i < text.length - 1; i++) {
+                      if (!preForSearch
+                          .contains(text.substring(i, i + 2))) {
+                        preForSearch.add(text.substring(i, i + 2));
+                      }
+                    }
+                    searchStateStream = await DatabaseService(uid)
+                        .searchDataCollect(preForSearch);
+                    setState(() {});
+                  } else {
+                    searchStateStream = null;
+                    setState(() {});
+                  }
+                },
+                textAlignVertical: TextAlignVertical.center,
+                style: const TextStyle(
+                  fontSize: 19,
+                ),
+                decoration: const InputDecoration(
+                    prefixIcon: Icon(
+                      Icons.search,
+                      size: 19,
+                    ),
+                    isDense: true,
+                    border: InputBorder.none,
+                    hintText: '検索',
+                    hintStyle: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 19,
+                    ))),
           )),
       body: Column(
         children: [
