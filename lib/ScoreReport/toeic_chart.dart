@@ -12,8 +12,9 @@ class _TOEICChartState extends State<TOEICChart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff3B00FF),
       appBar: AppBar(
-        title: Text(''),
+        title: const Text(''),
       ),
       body: AspectRatio(
         aspectRatio: 16 / 9,
@@ -22,14 +23,20 @@ class _TOEICChartState extends State<TOEICChart> {
             {
               'id': 'Line',
               'data': [
-                {'domain': 0, 'measure': 4.1},
+                {'domain': 0, 'measure': 5},
                 {'domain': 2, 'measure': 4},
                 {'domain': 3, 'measure': 6},
                 {'domain': 4, 'measure': 1},
               ],
+              
             },
           ],
-          lineColor: (lineData, index, id) => Colors.amber,
+          lineWidth: 3.3,
+          pointColor: (lineData, index, id) {
+            return const Color(0xff3B00FF);
+          },
+          includePoints: true,
+          lineColor: (lineData, index, id) => Colors.white,
         ),
       ),
     );
