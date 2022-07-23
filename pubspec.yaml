@@ -50,6 +50,7 @@ dependencies:
   pub_semver: ^2.0.0
   package_info: ^2.0.1
   google_mobile_ads:
+  syncfusion_flutter_charts: ^20.2.39
 
 dev_dependencies:
   flutter_test:
