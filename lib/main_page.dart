@@ -1,3 +1,4 @@
+import 'package:eigo/Chart/benkyoukiroku.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/Home/home_screen.dart';
@@ -58,6 +59,13 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
+                Icons.bar_chart_outlined,
+                size: 40,
+              ),
+              label: 'レポート',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
                 Icons.account_circle,
                 size: 30,
               ),
@@ -68,6 +76,7 @@ class _MainPageState extends State<MainPage> {
         index: currenttab,
         children: const [
           HomeScreen(),
+          BenkyouKiroku(),
           ProfilePage(),
         ],
       ),
