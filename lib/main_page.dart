@@ -1,4 +1,5 @@
 import 'package:eigo/Chart/benkyoukiroku.dart';
+import 'package:eigo/TextsTimer/timer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/Home/home_screen.dart';
@@ -59,6 +60,13 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
+                Icons.add_box_outlined,
+                size: 33,
+              ),
+              label: '記録する',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
                 Icons.bar_chart_outlined,
                 size: 40,
               ),
@@ -74,8 +82,9 @@ class _MainPageState extends State<MainPage> {
           ]),
       body: IndexedStack(
         index: currenttab,
-        children: const [
+        children: [
           HomeScreen(),
+          TextsTimer(),
           BenkyouKiroku(),
           ProfilePage(),
         ],
