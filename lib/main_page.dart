@@ -1,4 +1,3 @@
-import 'package:eigo/ScoreReport/toeic_chart.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/Home/home_screen.dart';
@@ -59,13 +58,6 @@ class _MainPageState extends State<MainPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.show_chart_rounded ,
-                size: 30,
-              ),
-              label: 'スコアレポート',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
                 Icons.account_circle,
                 size: 30,
               ),
@@ -76,7 +68,6 @@ class _MainPageState extends State<MainPage> {
         index: currenttab,
         children: const [
           HomeScreen(),
-          TOEICChart(),
           ProfilePage(),
         ],
       ),
