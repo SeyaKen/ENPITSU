@@ -46,72 +46,76 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 25),
-            height: MediaQuery.of(context).size.height * 0.3,
-            child: DChartBar(
-              data: [
-                {
-                  'id': 'Bar',
-                  'data': [
-                    {
-                      'domain': DateTime(date.year, date.month, date.day - 6)
-                          .toString()
-                          .substring(6, 10)
-                          .replaceAll('-', '/'),
-                      'measure': 19
-                    },
-                    {
-                      'domain': DateTime(date.year, date.month, date.day - 5)
-                          .toString()
-                          .substring(6, 10)
-                          .replaceAll('-', '/'),
-                      'measure': 4
-                    },
-                    {
-                      'domain': DateTime(date.year, date.month, date.day - 4)
-                          .toString()
-                          .substring(6, 10)
-                          .replaceAll('-', '/'),
-                      'measure': 6
-                    },
-                    {
-                      'domain': DateTime(date.year, date.month, date.day - 3)
-                          .toString()
-                          .substring(6, 10)
-                          .replaceAll('-', '/'),
-                      'measure': 0.3
-                    },
-                    {
-                      'domain': DateTime(date.year, date.month, date.day - 2)
-                          .toString()
-                          .substring(6, 10)
-                          .replaceAll('-', '/'),
-                      'measure': 3
-                    },
-                    {
-                      'domain': DateTime(date.year, date.month, date.day - 1)
-                          .toString()
-                          .substring(6, 10)
-                          .replaceAll('-', '/'),
-                      'measure': 4
-                    },
-                    {
-                      'domain': DateTime.now()
-                          .toString()
-                          .substring(6, 10)
-                          .replaceAll('-', '/'),
-                      'measure': 0.3
-                    },
-                  ],
-                },
-              ],
-              domainLabelPaddingToAxisLine: 16,
-              axisLineTick: 2,
-              axisLinePointTick: 2,
-              axisLinePointWidth: 10,
-              axisLineColor: const Color(0xff3B00FF),
-              measureLabelPaddingToAxisLine: 16,
-              barColor: (barData, index, id) => const Color(0xff3B00FF),
-              showBarValue: true,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: DChartBar(
+                data: [
+                  {
+                    'id': 'Bar',
+                    'data': [
+                      {
+                        'domain': DateTime(date.year, date.month, date.day - 6)
+                            .toString()
+                            .substring(6, 10)
+                            .replaceAll('-', '/'),
+                        'measure': 19
+                      },
+                      {
+                        'domain': DateTime(date.year, date.month, date.day - 5)
+                            .toString()
+                            .substring(6, 10)
+                            .replaceAll('-', '/'),
+                        'measure': 4
+                      },
+                      {
+                        'domain': DateTime(date.year, date.month, date.day - 4)
+                            .toString()
+                            .substring(6, 10)
+                            .replaceAll('-', '/'),
+                        'measure': 6
+                      },
+                      {
+                        'domain': DateTime(date.year, date.month, date.day - 3)
+                            .toString()
+                            .substring(6, 10)
+                            .replaceAll('-', '/'),
+                        'measure': 0.3
+                      },
+                      {
+                        'domain': DateTime(date.year, date.month, date.day - 2)
+                            .toString()
+                            .substring(6, 10)
+                            .replaceAll('-', '/'),
+                        'measure': 3
+                      },
+                      {
+                        'domain': DateTime(date.year, date.month, date.day - 1)
+                            .toString()
+                            .substring(6, 10)
+                            .replaceAll('-', '/'),
+                        'measure': 4
+                      },
+                      {
+                        'domain': DateTime.now()
+                            .toString()
+                            .substring(6, 10)
+                            .replaceAll('-', '/'),
+                        'measure': 0.3
+                      },
+                    ],
+                  },
+                ],
+                barValue: (barData, index) => '${barData['measure']}h',
+                showBarValue: true,
+                barValuePosition: BarValuePosition.outside,
+                domainLabelPaddingToAxisLine: 16,
+                axisLineTick: 2,
+                axisLinePointTick: 2,
+                axisLinePointWidth: 10,
+                axisLineColor: const Color(0xff3B00FF),
+                measureLabelPaddingToAxisLine: 16,
+                barColor: (barData, index, id) => const Color(0xff3B00FF),
+              ),
             ),
           ),
           const SizedBox(
@@ -121,7 +125,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Row(
               children: const [
-                Text('学習時間',
+                Text('時間配分',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 114, 112, 112),
