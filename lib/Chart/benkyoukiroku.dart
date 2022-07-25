@@ -238,98 +238,124 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: const Text('レポート',
+          title: const Text('',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               )),
         ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      children: const [
-                        Text('学習時間',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 114, 112, 112),
-                            )),
-                      ],
+        body: SingleChildScrollView(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        children: const [
+                          Text('学習時間',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 114, 112, 112),
+                              )),
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: charts.BarChart(
-                          getData(),
-                          animate: false,
-                          barGroupingType: charts.BarGroupingType.stacked,
-                        )),
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      children: const [
-                        Text('時間配分',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 114, 112, 112),
-                            )),
-                      ],
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: charts.BarChart(
+                            getData(),
+                            animate: false,
+                            barGroupingType: charts.BarGroupingType.stacked,
+                          )),
                     ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.30,
-                        width: MediaQuery.of(context).size.width,
-                        child: charts.PieChart<String>(
-                          _seriesPieData!,
-                          animate: false,
-                          behaviors: [
-                            charts.DatumLegend(
-                                outsideJustification:
-                                    charts.OutsideJustification.endDrawArea,
-                                horizontalFirst: false,
-                                desiredMaxRows: 10,
-                                cellPadding: const EdgeInsets.all(
-                                    0),
-                                entryTextStyle: const charts.TextStyleSpec(
-                                  color: charts
-                                      .MaterialPalette.black,
-                                  fontSize: 11,
-                                ))
-                          ],
-                          defaultRenderer: charts.ArcRendererConfig(
-                              arcWidth: 100000,
-                              arcRendererDecorators: [
-                                charts.ArcLabelDecorator(
-                                    labelPosition:
-                                        charts.ArcLabelPosition.inside)
-                              ]),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: 50,
-                  child: banner != null
-                      ? AdWidget(
-                          ad: banner!,
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        children: const [
+                          Text(
+                            '時間配分',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 114, 112, 112),
+                              )),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.30,
+                          width: MediaQuery.of(context).size.width,
+                          child: charts.PieChart<String>(
+                            _seriesPieData!,
+                            animate: false,
+                            behaviors: [
+                              charts.DatumLegend(
+                                  outsideJustification:
+                                      charts.OutsideJustification.endDrawArea,
+                                  horizontalFirst: false,
+                                  desiredMaxRows: 10,
+                                  cellPadding: const EdgeInsets.all(0),
+                                  entryTextStyle: const charts.TextStyleSpec(
+                                    color: charts.MaterialPalette.black,
+                                    fontSize: 11,
+                                  ))
+                            ],
+                            defaultRenderer: charts.ArcRendererConfig(
+                                arcWidth: 100000,
+                                arcRendererDecorators: [
+                                  charts.ArcLabelDecorator(
+                                      labelPosition:
+                                          charts.ArcLabelPosition.inside)
+                                ]),
+                          ),
                         )
-                      : const SizedBox()),
-            ]));
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.30,
+                          width: MediaQuery.of(context).size.width,
+                          child: charts.PieChart<String>(
+                            _seriesPieData!,
+                            animate: false,
+                            behaviors: [
+                              charts.DatumLegend(
+                                  outsideJustification:
+                                      charts.OutsideJustification.endDrawArea,
+                                  horizontalFirst: false,
+                                  desiredMaxRows: 10,
+                                  cellPadding: const EdgeInsets.all(0),
+                                  entryTextStyle: const charts.TextStyleSpec(
+                                    color: charts.MaterialPalette.black,
+                                    fontSize: 11,
+                                  ))
+                            ],
+                            defaultRenderer: charts.ArcRendererConfig(
+                                arcWidth: 100000,
+                                arcRendererDecorators: [
+                                  charts.ArcLabelDecorator(
+                                      labelPosition:
+                                          charts.ArcLabelPosition.inside)
+                                ]),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                
+              ]),
+        ));
   }
 }

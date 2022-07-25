@@ -1,4 +1,5 @@
 import 'package:eigo/Chart/benkyoukiroku.dart';
+import 'package:eigo/TextsTimer/texts_lists.dart';
 import 'package:eigo/TextsTimer/timer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -82,9 +83,9 @@ class _MainPageState extends State<MainPage> {
           ]),
       body: IndexedStack(
         index: currenttab,
-        children: [
+        children: const [
           HomeScreen(),
-          TextsTimer(),
+          TextList(),
           BenkyouKiroku(),
           ProfilePage(),
         ],
