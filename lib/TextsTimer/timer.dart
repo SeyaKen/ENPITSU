@@ -40,7 +40,7 @@ class _TextsTimerState extends State<TextsTimer> {
 
   void startTimer() {
     setState(() {
-    GoonTimer = true;
+      GoonTimer = true;
     });
     timer = Timer.periodic(const Duration(seconds: 1), (_) => addTime());
   }
@@ -54,7 +54,9 @@ class _TextsTimerState extends State<TextsTimer> {
 
   @override
   Widget build(BuildContext context) {
-
+    // final isZero = timer == null ? false : timer!.isActive;
+    // タイマーがまだ始まっていないのか、もう一回押されたのかを確認するための処理
+    final isZero = duration.inSeconds != 0;
     return Scaffold(
         body: Center(
       child: Column(
@@ -62,20 +64,86 @@ class _TextsTimerState extends State<TextsTimer> {
         children: [
           buildTime(),
           const SizedBox(height: 50),
-          InkWell(
-            onTap: () {
-              // タイマーが進んでいたら、止まる処理、
-              // タイマーが止まっていたら、進む処理
-              GoonTimer ? stopTimer() : startTimer();
-            },
-            child: Container(
-              padding: const EdgeInsets.all(5.0),
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.red),
-                borderRadius: BorderRadius.circular(1000),
-              ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                isZero
+                    ? InkWell(
+                        onTap: () {
+                          reset();
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(5.0),
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(1000),
+                          ),
+                          child: const Center(
+                            child: Text('リセット',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                )),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+                InkWell(
+                  onTap: () {
+                    // タイマーが進んでいたら、止まる処理、
+                    // タイマーが止まっていたら、進む処理
+                    GoonTimer ? stopTimer() : startTimer();
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    width: 130,
+                    height: 130,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: GoonTimer ? Colors.red : const Color(0xff3B00FF),
+                      ),
+                      borderRadius: BorderRadius.circular(1000),
+                    ),
+                    child: Center(
+                      child: Text(GoonTimer ? 'ストップ' : 'スタート',
+                          style: TextStyle(
+                            color:
+                                GoonTimer ? Colors.red : const Color(0xff3B00FF),
+                            fontSize: 20,
+                          )),
+                    ),
+                  ),
+                ),
+                isZero
+                    ? InkWell(
+                        onTap: () {},
+                        child: Container(
+                          padding: const EdgeInsets.all(5.0),
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(1000),
+                          ),
+                          child: const Center(
+                            child: Text('完了',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                )),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              ],
             ),
           ),
         ],
