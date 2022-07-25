@@ -4,6 +4,23 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
+// 棒グラフのデータ
+class BarData {
+  final String year;
+  final int sales;
+
+  BarData(this.year, this.sales);
+}
+
+// 円グラフのデータ
+class Task {
+  String task;
+  double taskvalue;
+  Color colorval;
+
+  Task(this.task, this.taskvalue, this.colorval);
+}
+
 class BenkyouKiroku extends StatefulWidget {
   const BenkyouKiroku({super.key});
 
@@ -11,57 +28,71 @@ class BenkyouKiroku extends StatefulWidget {
   State<BenkyouKiroku> createState() => _BenkyouKirokuState();
 }
 
-/// Sample ordinal data type.
-class OrdinalSales {
-  final String year;
-  final int sales;
-
-  OrdinalSales(this.year, this.sales);
-}
-
 class _BenkyouKirokuState extends State<BenkyouKiroku> {
   late DateTime date;
   BannerAd? banner;
 
+  List<charts.Series<Task, String>>? _seriesPieData;
+
+  _generateData() {
+    final pieData = [
+      Task('プログラミング', 40, Colors.blue),
+      Task('英語', 13, Colors.orange),
+      Task('韓国語', 40, Colors.red),
+    ];
+
+    _seriesPieData!.add(
+      charts.Series(
+        data: pieData,
+        domainFn: (Task task, _) => task.task,
+        measureFn: (Task task, _) => task.taskvalue,
+        colorFn: (Task task, _) =>
+            charts.ColorUtil.fromDartColor(task.colorval),
+        id: 'DailyTask',
+        labelAccessorFn: (Task row, _) => '${row.taskvalue}',
+      ),
+    );
+  }
+
   List<charts.Series<dynamic, String>> getData() {
     final desktopSalesData = [
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 6)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           5),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 5)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 4)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 3)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 2)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           10),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 1)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           10),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day)
               .toString()
               .substring(6, 10)
@@ -70,43 +101,43 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
     ];
 
     final tableSalesData = [
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 6)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           5),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 5)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 4)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 3)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 2)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           10),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 1)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           10),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day)
               .toString()
               .substring(6, 10)
@@ -115,43 +146,43 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
     ];
 
     final mobileSalesData = [
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 6)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           5),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 5)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 4)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 3)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           14),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 2)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           10),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day - 1)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
           10),
-      OrdinalSales(
+      BarData(
           DateTime(date.year, date.month, date.day)
               .toString()
               .substring(6, 10)
@@ -160,22 +191,22 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
     ];
 
     return [
-      charts.Series<OrdinalSales, String>(
-        id: 'Desktop',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
+      charts.Series<BarData, String>(
+        id: 'プログラミング',
+        domainFn: (BarData sales, _) => sales.year,
+        measureFn: (BarData sales, _) => sales.sales,
         data: desktopSalesData,
       ),
-      charts.Series<OrdinalSales, String>(
-        id: 'Tablet',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
+      charts.Series<BarData, String>(
+        id: '英語',
+        domainFn: (BarData sales, _) => sales.year,
+        measureFn: (BarData sales, _) => sales.sales,
         data: tableSalesData,
       ),
-      charts.Series<OrdinalSales, String>(
-        id: 'Mobile',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
+      charts.Series<BarData, String>(
+        id: '韓国語',
+        domainFn: (BarData sales, _) => sales.year,
+        measureFn: (BarData sales, _) => sales.sales,
         data: mobileSalesData,
       ),
     ];
@@ -195,6 +226,8 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
         )..load();
       });
     });
+    _seriesPieData = <charts.Series<Task, String>>[];
+    _generateData();
     super.initState();
   }
 
@@ -259,7 +292,31 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.20,
                         width: MediaQuery.of(context).size.height * 0.20,
-                        // child:
+                        child: charts.PieChart(
+                          _seriesPieData!,
+                          animate: false,
+                          behaviors: [
+                            charts.DatumLegend(
+                              outsideJustification: charts.OutsideJustification.endDrawArea,
+                              horizontalFirst: false,
+                              desiredMaxRows: 2,
+                              cellPadding: const EdgeInsets.only(right: 4, bottom: 4),
+                              entryTextStyle: charts.TextStyleSpec(
+                                color: charts.MaterialPalette.purple.shadeDefault,
+                                fontFamily: 'Georgia',
+                                fontSize: 11,
+                              )
+                            )
+                          ],
+                          defaultRenderer: charts.ArcRendererConfig(
+                            arcLength: 100,
+                            arcRendererDecorators: [
+                              charts.ArcLabelDecorator(
+                                labelPosition: charts.ArcLabelPosition.inside
+                              )
+                            ]
+                          ),
+                        )
                       )
                     ],
                   ),
