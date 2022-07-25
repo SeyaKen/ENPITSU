@@ -11,12 +11,175 @@ class BenkyouKiroku extends StatefulWidget {
   State<BenkyouKiroku> createState() => _BenkyouKirokuState();
 }
 
+/// Sample ordinal data type.
+class OrdinalSales {
+  final String year;
+  final int sales;
+
+  OrdinalSales(this.year, this.sales);
+}
+
 class _BenkyouKirokuState extends State<BenkyouKiroku> {
   late DateTime date;
   BannerAd? banner;
-  final List<charts.Series<dynamic, String>> seriesList = [
-    
-  ];
+
+  List<charts.Series<dynamic, String>> getData() {
+    final desktopSalesData = [
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 6)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          5),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 5)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 4)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 3)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 2)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 1)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+    ];
+
+    final tableSalesData = [
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 6)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          5),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 5)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 4)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 3)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 2)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 1)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+    ];
+
+    final mobileSalesData = [
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 6)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          5),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 5)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 4)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 3)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          14),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 2)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day - 1)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          10),
+      OrdinalSales(
+          DateTime(date.year, date.month, date.day)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          0),
+    ];
+
+    return [
+      charts.Series<OrdinalSales, String>(
+        id: 'Desktop',
+        domainFn: (OrdinalSales sales, _) => sales.year,
+        measureFn: (OrdinalSales sales, _) => sales.sales,
+        data: desktopSalesData,
+      ),
+      charts.Series<OrdinalSales, String>(
+        id: 'Tablet',
+        domainFn: (OrdinalSales sales, _) => sales.year,
+        measureFn: (OrdinalSales sales, _) => sales.sales,
+        data: tableSalesData,
+      ),
+      charts.Series<OrdinalSales, String>(
+        id: 'Mobile',
+        domainFn: (OrdinalSales sales, _) => sales.year,
+        measureFn: (OrdinalSales sales, _) => sales.sales,
+        data: mobileSalesData,
+      ),
+    ];
+  }
 
   @override
   void initState() {
@@ -70,7 +233,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                     child: AspectRatio(
                         aspectRatio: 16 / 9,
                         child: charts.BarChart(
-                          seriesList,
+                          getData(),
                           animate: false,
                           barGroupingType: charts.BarGroupingType.stacked,
                         )),
