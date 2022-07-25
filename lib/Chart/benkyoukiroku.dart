@@ -48,7 +48,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
         measureFn: (Task task, _) => task.taskvalue,
         colorFn: (Task task, _) =>
             charts.ColorUtil.fromDartColor(task.colorval),
-        id: 'DailyTask',
+        id: 'Daily Task',
         labelAccessorFn: (Task row, _) => '${row.taskvalue}',
       ),
     );
@@ -290,46 +290,46 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.20,
-                        width: MediaQuery.of(context).size.height * 0.20,
-                        child: charts.PieChart(
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        width: MediaQuery.of(context).size.width,
+                        child: charts.PieChart<String>(
                           _seriesPieData!,
                           animate: false,
                           behaviors: [
                             charts.DatumLegend(
-                              outsideJustification: charts.OutsideJustification.endDrawArea,
-                              horizontalFirst: false,
-                              desiredMaxRows: 2,
-                              cellPadding: const EdgeInsets.only(right: 4, bottom: 4),
-                              entryTextStyle: charts.TextStyleSpec(
-                                color: charts.MaterialPalette.purple.shadeDefault,
-                                fontFamily: 'Georgia',
-                                fontSize: 11,
-                              )
-                            )
+                                outsideJustification:
+                                    charts.OutsideJustification.endDrawArea,
+                                horizontalFirst: false,
+                                desiredMaxRows: 10,
+                                cellPadding: const EdgeInsets.all(
+                                    0),
+                                entryTextStyle: const charts.TextStyleSpec(
+                                  color: charts
+                                      .MaterialPalette.black,
+                                  fontSize: 11,
+                                ))
                           ],
                           defaultRenderer: charts.ArcRendererConfig(
-                            arcLength: 100,
-                            arcRendererDecorators: [
-                              charts.ArcLabelDecorator(
-                                labelPosition: charts.ArcLabelPosition.inside
-                              )
-                            ]
-                          ),
-                        )
+                              arcWidth: 100000,
+                              arcRendererDecorators: [
+                                charts.ArcLabelDecorator(
+                                    labelPosition:
+                                        charts.ArcLabelPosition.inside)
+                              ]),
+                        ),
                       )
                     ],
                   ),
-                  SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: 50,
-                      child: banner != null
-                          ? AdWidget(
-                              ad: banner!,
-                            )
-                          : const SizedBox()),
                 ],
               ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: banner != null
+                      ? AdWidget(
+                          ad: banner!,
+                        )
+                      : const SizedBox()),
             ]));
   }
 }
