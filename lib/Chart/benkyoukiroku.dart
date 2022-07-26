@@ -30,7 +30,6 @@ class BenkyouKiroku extends StatefulWidget {
 
 class _BenkyouKirokuState extends State<BenkyouKiroku> {
   late DateTime date;
-  BannerAd? banner;
 
   List<charts.Series<Task, String>>? _seriesPieData;
 
@@ -215,17 +214,6 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
   @override
   void initState() {
     date = DateTime.now();
-    final adState = Provider.of<AdState>(context, listen: false);
-    adState.initialization.then((status) {
-      setState(() {
-        banner = BannerAd(
-          adUnitId: adState.bannerAdUnitId,
-          size: AdSize.banner,
-          request: const AdRequest(),
-          listener: const BannerAdListener(),
-        )..load();
-      });
-    });
     _seriesPieData = <charts.Series<Task, String>>[];
     _generateData();
     super.initState();
@@ -280,7 +268,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                       child: Row(
                         children: const [
                           Text(
-                            '時間配分',
+                            '時間配分(今日)',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 114, 112, 112),
@@ -320,6 +308,19 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                         )
                       ],
                     ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        children: const [
+                          Text(
+                            '時間配分(週)',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromARGB(255, 114, 112, 112),
+                              )),
+                        ],
+                      ),
+                    ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -354,7 +355,6 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                     ),
                   ],
                 ),
-                
               ]),
         ));
   }
