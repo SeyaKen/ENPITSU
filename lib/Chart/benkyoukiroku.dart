@@ -30,14 +30,15 @@ class BenkyouKiroku extends StatefulWidget {
 
 class _BenkyouKirokuState extends State<BenkyouKiroku> {
   late DateTime date;
-
   List<charts.Series<Task, String>>? _seriesPieData;
+  final List<String> entries = <String>['韓国語', 'プログラミング', '英語'];
+    final List<Color> colorCodes = [const Color(0xff7ba734), const Color(0xffc09014), const Color(0xff0064aa)];
 
   _generateData() {
     final pieData = [
-      Task('プログラミング', 40, Colors.blue),
-      Task('英語', 13, Colors.orange),
-      Task('韓国語', 40, Colors.red),
+      Task('プログラミング', 40, colorCodes[0]),
+      Task('英語', 13, colorCodes[1]),
+      Task('韓国語', 40, colorCodes[2]),
     ];
 
     _seriesPieData!.add(
@@ -267,8 +268,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Row(
                         children: const [
-                          Text(
-                            '時間配分(今日)',
+                          Text('時間配分(今日)',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 114, 112, 112),
@@ -276,44 +276,61 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                         ],
                       ),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.30,
-                          width: MediaQuery.of(context).size.width,
-                          child: charts.PieChart<String>(
-                            _seriesPieData!,
-                            animate: false,
-                            behaviors: [
-                              charts.DatumLegend(
-                                  outsideJustification:
-                                      charts.OutsideJustification.endDrawArea,
-                                  horizontalFirst: false,
-                                  desiredMaxRows: 10,
-                                  cellPadding: const EdgeInsets.all(0),
-                                  entryTextStyle: const charts.TextStyleSpec(
-                                    color: charts.MaterialPalette.black,
-                                    fontSize: 11,
-                                  ))
-                            ],
-                            defaultRenderer: charts.ArcRendererConfig(
-                                arcWidth: 100000,
-                                arcRendererDecorators: [
-                                  charts.ArcLabelDecorator(
-                                      labelPosition:
-                                          charts.ArcLabelPosition.inside)
-                                ]),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.40,
+                            child: charts.PieChart<String>(
+                              _seriesPieData!,
+                              animate: false,
+                              layoutConfig: charts.LayoutConfig(
+                                leftMarginSpec: charts.MarginSpec.fixedPixel(0),
+                                topMarginSpec: charts.MarginSpec.fixedPixel(0),
+                                rightMarginSpec:
+                                    charts.MarginSpec.fixedPixel(0),
+                                bottomMarginSpec:
+                                    charts.MarginSpec.fixedPixel(0),
+                              ),
+                              defaultRenderer: charts.ArcRendererConfig(
+                                  arcWidth: 10000,
+                                  arcRendererDecorators: [
+                                    charts.ArcLabelDecorator(
+                                        labelPosition:
+                                            charts.ArcLabelPosition.inside)
+                                  ]),
+                            ),
                           ),
-                        )
-                      ],
+                          Flexible(
+                            child: ListView.builder(
+                                itemCount: entries.length,
+                                itemBuilder:
+                                    (BuildContext context, int index) {
+                                  return Row(
+                                    children: [
+                                      Icon(
+                                        Icons.circle,
+                                        size: 11,
+                                        color: colorCodes[index],
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(entries[index]),
+                                    ],
+                                  );
+                                }),
+                          ),
+                        ],
+                      ),
                     ),
+                    const SizedBox(height: 40),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Row(
                         children: const [
-                          Text(
-                            '時間配分(週)',
+                          Text('時間配分(週)',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color.fromARGB(255, 114, 112, 112),
@@ -325,23 +342,11 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.30,
-                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          width: MediaQuery.of(context).size.width * 0.5,
                           child: charts.PieChart<String>(
                             _seriesPieData!,
                             animate: false,
-                            behaviors: [
-                              charts.DatumLegend(
-                                  outsideJustification:
-                                      charts.OutsideJustification.endDrawArea,
-                                  horizontalFirst: false,
-                                  desiredMaxRows: 10,
-                                  cellPadding: const EdgeInsets.all(0),
-                                  entryTextStyle: const charts.TextStyleSpec(
-                                    color: charts.MaterialPalette.black,
-                                    fontSize: 11,
-                                  ))
-                            ],
                             defaultRenderer: charts.ArcRendererConfig(
                                 arcWidth: 100000,
                                 arcRendererDecorators: [
