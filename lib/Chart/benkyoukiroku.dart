@@ -348,25 +348,59 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                         ],
                       ),
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child: charts.PieChart<String>(
-                            _seriesPieData!,
-                            animate: false,
-                            defaultRenderer: charts.ArcRendererConfig(
-                                arcWidth: 100000,
-                                arcRendererDecorators: [
-                                  charts.ArcLabelDecorator(
-                                      labelPosition:
-                                          charts.ArcLabelPosition.inside)
-                                ]),
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.40,
+                            child: Stack(
+                              children: [
+                                charts.PieChart<String>(
+                                  _seriesPieData!,
+                                  animate: false,
+                                  layoutConfig: charts.LayoutConfig(
+                                    leftMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                    topMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                    rightMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                    bottomMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                  ),
+                                  defaultRenderer: charts.ArcRendererConfig(
+                                      arcWidth: 10000,
+                                      arcRendererDecorators: [
+                                        charts.ArcLabelDecorator(
+                                            labelPosition:
+                                                charts.ArcLabelPosition.inside)
+                                      ]),
+                                ),
+                              ],
+                            ),
                           ),
-                        )
-                      ],
+                          Flexible(
+                            child: ListView.builder(
+                                itemCount: entries.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Row(
+                                    children: [
+                                      Icon(
+                                        Icons.circle,
+                                        size: 11,
+                                        color: colorCodes[index],
+                                      ),
+                                      const SizedBox(width: 5),
+                                      Text(entries[index]),
+                                    ],
+                                  );
+                                }),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
