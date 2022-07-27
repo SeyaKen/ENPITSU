@@ -32,7 +32,11 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
   late DateTime date;
   List<charts.Series<Task, String>>? _seriesPieData;
   final List<String> entries = <String>['韓国語', 'プログラミング', '英語'];
-    final List<Color> colorCodes = [const Color(0xff7ba734), const Color(0xffc09014), const Color(0xff0064aa)];
+  final List<Color> colorCodes = [
+    const Color(0xff7ba734),
+    const Color(0xffc09014),
+    const Color(0xff0064aa)
+  ];
 
   _generateData() {
     final pieData = [
@@ -284,31 +288,37 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                         children: [
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.40,
-                            child: charts.PieChart<String>(
-                              _seriesPieData!,
-                              animate: false,
-                              layoutConfig: charts.LayoutConfig(
-                                leftMarginSpec: charts.MarginSpec.fixedPixel(0),
-                                topMarginSpec: charts.MarginSpec.fixedPixel(0),
-                                rightMarginSpec:
-                                    charts.MarginSpec.fixedPixel(0),
-                                bottomMarginSpec:
-                                    charts.MarginSpec.fixedPixel(0),
-                              ),
-                              defaultRenderer: charts.ArcRendererConfig(
-                                  arcWidth: 10000,
-                                  arcRendererDecorators: [
-                                    charts.ArcLabelDecorator(
-                                        labelPosition:
-                                            charts.ArcLabelPosition.inside)
-                                  ]),
+                            child: Stack(
+                              children: [
+                                charts.PieChart<String>(
+                                  _seriesPieData!,
+                                  animate: false,
+                                  layoutConfig: charts.LayoutConfig(
+                                    leftMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                    topMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                    rightMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                    bottomMarginSpec:
+                                        charts.MarginSpec.fixedPixel(0),
+                                  ),
+                                  defaultRenderer: charts.ArcRendererConfig(
+                                    arcWidth: 10,
+                                  ),
+                                ),
+                                Align(
+                                  // 赤のコンテナだけを右下に配置する
+                                  alignment: Alignment.center,
+                                  child: Text('10.3h'),
+                                ),
+                              ],
                             ),
                           ),
                           Flexible(
                             child: ListView.builder(
                                 itemCount: entries.length,
-                                itemBuilder:
-                                    (BuildContext context, int index) {
+                                itemBuilder: (BuildContext context, int index) {
                                   return Row(
                                     children: [
                                       Icon(
