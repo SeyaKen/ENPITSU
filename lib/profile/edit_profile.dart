@@ -71,7 +71,7 @@ class _EditProfileState extends State<EditProfile> {
                             child: const Text(
                               '完了',
                               style: TextStyle(
-                                color: Color(0xff3B00FF),
+                                color: Colors.blue,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -113,7 +113,7 @@ class _EditProfileState extends State<EditProfile> {
                                 },
                                 child: const Text('プロフィール写真を変更',
                                     style: TextStyle(
-                                      color: Color(0xff3B00FF),
+                                      color: Colors.blue,
                                       fontWeight: FontWeight.bold,
                                     ))),
                             SizedBox(

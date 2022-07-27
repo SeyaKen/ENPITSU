@@ -106,15 +106,14 @@ class _TextsTimerState extends State<TextsTimer> {
                     height: 130,
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: GoonTimer ? Colors.red : const Color(0xff3B00FF),
+                        color: GoonTimer ? Colors.red : Colors.blue,
                       ),
                       borderRadius: BorderRadius.circular(1000),
                     ),
                     child: Center(
                       child: Text(GoonTimer ? 'ストップ' : 'スタート',
                           style: TextStyle(
-                            color:
-                                GoonTimer ? Colors.red : const Color(0xff3B00FF),
+                            color: GoonTimer ? Colors.red : Colors.blue,
                             fontSize: 20,
                           )),
                     ),

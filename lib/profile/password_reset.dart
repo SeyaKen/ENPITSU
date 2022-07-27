@@ -56,7 +56,8 @@ class _SignInState extends State<PasswordReset> {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: Column(
                   children: [
-                    const Text('入力されたメールアドレス宛に、パスワード変更用のリンクを送ります。現在お使いのメールアドレスを入力してください。'),
+                    const Text(
+                        '入力されたメールアドレス宛に、パスワード変更用のリンクを送ります。現在お使いのメールアドレスを入力してください。'),
                     Column(
                       children: [
                         const SizedBox(
@@ -78,7 +79,7 @@ class _SignInState extends State<PasswordReset> {
                                   horizontal: 10, vertical: 13),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xff3B00FF),
+                                  color: Colors.blue,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -92,56 +93,56 @@ class _SignInState extends State<PasswordReset> {
                         ),
                         const SizedBox(height: 30),
                         Container(
-                        decoration: BoxDecoration(
-                          color: email.contains('@')
-                              ? const Color(0xff3B00FF)
-                              : const Color(0xff3B00FF).withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: 48,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        _auth.sendPasswordResetEmail(email: email);
-                                        Navigator.pop(context);
-                                      } else {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return CupertinoAlertDialog(
-                         actions: [
-                           CupertinoDialogAction(
-                             isDefaultAction: true,
-                             child: const Text("閉じる"),
-                             onPressed: () {
-                               Navigator.of(context).pop();
-                             },
-                           ),
-                         ],
-                         title:
-                             const Text('正しいメールアドレスを入力してください'));
-                                            });
-                                      }
-                                    },
-                                    child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.8,
-                                    child: const Center(
-                                      child: Text(
-                                        'ログインリンクを送信',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
+                          decoration: BoxDecoration(
+                            color: email.contains('@')
+                                ? Colors.blue
+                                : Colors.blue.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: 48,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    _auth.sendPasswordResetEmail(email: email);
+                                    Navigator.pop(context);
+                                  } else {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return CupertinoAlertDialog(
+                                              actions: [
+                                                CupertinoDialogAction(
+                                                  isDefaultAction: true,
+                                                  child: const Text("閉じる"),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                              title: const Text(
+                                                  '正しいメールアドレスを入力してください'));
+                                        });
+                                  }
+                                },
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  child: const Center(
+                                    child: Text(
+                                      'ログインリンクを送信',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
                                     ),
                                   ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ],

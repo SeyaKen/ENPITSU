@@ -722,7 +722,7 @@ class _HomeDetailState extends State<HomeDetail> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: const Color(0xff3B00FF),
+                  color: Colors.blue,
                   // border: Border.all(
                   //   color: Colors.black,
                   //   width: 4,

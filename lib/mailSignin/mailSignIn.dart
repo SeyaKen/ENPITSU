@@ -57,7 +57,7 @@ class _SignInState extends State<mailSignIn> {
                   widget.toggleView();
                 },
                 style: TextButton.styleFrom(
-                  primary: const Color(0xff3B00FF),
+                  primary: Colors.blue,
                 ),
               )
             ],
@@ -113,7 +113,7 @@ class _SignInState extends State<mailSignIn> {
                                   horizontal: 10, vertical: 13),
                               focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                  color: Color(0xff3B00FF),
+                                  color: Colors.blue,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -147,7 +147,7 @@ class _SignInState extends State<mailSignIn> {
                                       horizontal: 10, vertical: 13),
                                   focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xff3B00FF),
+                                      color: Colors.blue,
                                     ),
                                   ),
                                   enabledBorder: OutlineInputBorder(
@@ -183,8 +183,8 @@ class _SignInState extends State<mailSignIn> {
                         Container(
                           decoration: BoxDecoration(
                             color: password.length >= 7
-                                ? const Color(0xff3B00FF)
-                                : const Color(0xff3B00FF).withOpacity(0.3),
+                                ? Colors.blue
+                                : Colors.blue.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(3),
                           ),
                           width: MediaQuery.of(context).size.width * 0.8,
@@ -235,7 +235,7 @@ class _SignInState extends State<mailSignIn> {
                           child: const Text(
                             'パスワードを忘れた場合',
                             style: TextStyle(
-                              color: Color(0xff3B00FF),
+                              color: Colors.blue,
                             ),
                           ),
                         ),
