@@ -18,6 +18,7 @@ class _TextSearchWayState extends State<TextSearchWay> {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                       
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -91,7 +92,7 @@ class _TextSearchWayState extends State<TextSearchWay> {
               ],
             ),
             const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
             InkWell(
               onTap: () {

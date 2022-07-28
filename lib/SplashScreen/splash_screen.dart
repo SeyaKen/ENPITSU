@@ -19,8 +19,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (c) => 
-              loginCheck == 'LogIned'
+              builder: (c) => loginCheck == 'LogIned'
                   ? MainPage(
                       currenttab: 0,
                     )
@@ -38,19 +37,28 @@ class _MySplashScreenState extends State<MySplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Container(
-            color: Color(0XFFF2D095),
-            child: Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    height: MediaQuery.of(context).size.width * 0.8,
-                    child: Image.asset('assets/icon.png')),
-              ],
-            ))));
+    return Scaffold(
+      body: Container(
+          color: const Color(0XFFF2D095),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [
+              Icon(
+                Icons.circle,
+                color: Colors.black,
+                size: 150,
+              ),
+              SizedBox(height: 20),
+              Text('ENPITSU',
+                  style: TextStyle(
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                  )),
+            ],
+          )),
+    );
   }
 }
