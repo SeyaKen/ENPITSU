@@ -1,3 +1,4 @@
+import 'package:eigo/TextsTimer/texts_search_way.dart';
 import 'package:eigo/ad_state.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -35,79 +36,132 @@ class _TextListState extends State<TextList> {
       children: [
         SafeArea(
           child: Scaffold(
-            body: Column(children: [
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Text('テキスト',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 22,
-                        )),
-                  ],
-                ),
-              ),
-              Padding(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: const Text('テキスト',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  )),
+            ),
+            body: SingleChildScrollView(
+              child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 4,
-                    childAspectRatio: 1,
-                    children: List.generate(1, (i) {
-                      return i != 0
-                          ? Container(
-                              margin: const EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                // border: Border.all(color: Colors.black),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: LayoutBuilder(builder: (ctx, constraints) {
-                                return Column(children: [
-                                  Container(
-                                    height: constraints.maxHeight * 0.8,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.blue),
-                                      color: Colors.blue,
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(10.0),
-                                        topRight: Radius.circular(10.0),
+                child: Column(children: [
+                  GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.65,
+                      children: List.generate(3, (i) {
+                        return i != 0
+                            ? Container(
+                                margin: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child:
+                                    LayoutBuilder(builder: (ctx, constraints) {
+                                  return Column(children: [
+                                    SizedBox(
+                                      height: constraints.maxWidth,
+                                      width: constraints.maxWidth,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          // こんな画像のアドレスは存在しない.
+                                          'https://images-na.ssl-images-amazon.com/images/I/417gMKTA1pL._SX312_BO1,204,203,200_.jpg',
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('HELLO'),
-                                    ],
-                                  ),
-                                ]);
-                              }))
-                          : Container(
-                            margin: const EdgeInsets.all(3),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black,
-                                  width: 4,
+                                    const SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Row(
+                                        children: const [
+                                          Flexible(
+                                            child: Text(
+                                              '英単語ターゲット1900 6訂版 (大学JUKEN新書) 単行本（ソフトカバー）',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              maxLines: 3,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ]);
+                                }))
+                            : Container(
+                                margin: const EdgeInsets.all(3),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            child: InkWell(
-                              onTap:() {
-
-                              },
-                              child: const Icon(
-                                Icons.add,
-                                size: 60,
-                              ),
-                            )
-                          );
-                    })),
-              )
-            ]),
+                                child:
+                                    LayoutBuilder(builder: (ctx, constraints) {
+                                  return Column(
+                                    children: [
+                                      Container(
+                                          height: constraints.maxWidth,
+                                          width: constraints.maxWidth,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 5,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
+                                                      const TextSearchWay(),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          seconds: 0),
+                                                ),
+                                              );
+                                            },
+                                            child: const Icon(
+                                              Icons.add,
+                                              size: 80,
+                                            ),
+                                          )),
+                                      const SizedBox(height: 5),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Row(
+                                        children: const [
+                                          Flexible(
+                                            child: Text(
+                                              '英単語ターゲット1900 6訂版 (大学JUKEN新書) 単行本（ソフトカバー）',
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              maxLines: 3,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ],
+                                  );
+                                }),
+                              );
+                      }))
+                ]),
+              ),
+            ),
           ),
         ),
         Positioned(
