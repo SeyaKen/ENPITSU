@@ -136,24 +136,26 @@ class _TextListState extends State<TextList> {
                                             ),
                                           )),
                                       const SizedBox(height: 5),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: Row(
-                                        children: const [
-                                          Flexible(
-                                            child: Text(
-                                              '英単語ターゲット1900 6訂版 (大学JUKEN新書) 単行本（ソフトカバー）',
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                overflow: TextOverflow.ellipsis,
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 5),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: const [
+                                            Flexible(
+                                              child: Text(
+                                                '新しい教材を登録',
+                                                style: TextStyle(
+                                                  fontSize: 15,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                maxLines: 3,
                                               ),
-                                              maxLines: 3,
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
                                     ],
                                   );
                                 }),
