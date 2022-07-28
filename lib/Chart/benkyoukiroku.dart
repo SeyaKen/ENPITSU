@@ -1,7 +1,4 @@
-import 'package:eigo/ad_state.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:provider/provider.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 
 // 棒グラフのデータ
@@ -226,185 +223,191 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: const Text('',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              )),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        children: const [
-                          Text('学習時間',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 114, 112, 112),
-                              )),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: charts.BarChart(
-                            getData(),
-                            animate: false,
-                            barGroupingType: charts.BarGroupingType.stacked,
-                          )),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        children: const [
-                          Text('時間配分(今日)',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 114, 112, 112),
-                              )),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            child: Stack(
-                              children: [
-                                charts.PieChart<String>(
-                                  _seriesPieData!,
-                                  animate: false,
-                                  layoutConfig: charts.LayoutConfig(
-                                    leftMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                    topMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                    rightMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                    bottomMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                  ),
-                                  defaultRenderer: charts.ArcRendererConfig(
-                                    arcWidth: 10,
-                                  ),
-                                ),
-                                Align(
-                                  // 赤のコンテナだけを右下に配置する
-                                  alignment: Alignment.center,
-                                  child: Text('10.3h'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Flexible(
-                            child: ListView.builder(
-                                itemCount: entries.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Row(
-                                    children: [
-                                      Icon(
-                                        Icons.circle,
-                                        size: 11,
-                                        color: colorCodes[index],
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Text(entries[index]),
-                                    ],
-                                  );
-                                }),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: Row(
-                        children: const [
-                          Text('時間配分(週)',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color.fromARGB(255, 114, 112, 112),
-                              )),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      height: MediaQuery.of(context).size.height * 0.15,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.40,
-                            child: Stack(
-                              children: [
-                                charts.PieChart<String>(
-                                  _seriesPieData!,
-                                  animate: false,
-                                  layoutConfig: charts.LayoutConfig(
-                                    leftMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                    topMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                    rightMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                    bottomMarginSpec:
-                                        charts.MarginSpec.fixedPixel(0),
-                                  ),
-                                  defaultRenderer: charts.ArcRendererConfig(
-                                      arcWidth: 10000,
-                                      arcRendererDecorators: [
-                                        charts.ArcLabelDecorator(
-                                            labelPosition:
-                                                charts.ArcLabelPosition.inside)
-                                      ]),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Flexible(
-                            child: ListView.builder(
-                                itemCount: entries.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Row(
-                                    children: [
-                                      Icon(
-                                        Icons.circle,
-                                        size: 11,
-                                        color: colorCodes[index],
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Text(entries[index]),
-                                    ],
-                                  );
-                                }),
-                          ),
-                        ],
-                      ),
-                    ),
+    return SafeArea(
+      child: Scaffold(
+          body: SingleChildScrollView(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const  [
+                    Text('レポート',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontSize: 22,
+                        )),
                   ],
                 ),
-              ]),
-        ));
+              ),
+              Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: const [
+                        Text('学習時間',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 114, 112, 112),
+                            )),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: AspectRatio(
+                        aspectRatio: 16 / 9,
+                        child: charts.BarChart(
+                          getData(),
+                          animate: false,
+                          barGroupingType: charts.BarGroupingType.stacked,
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: const [
+                        Text('時間配分(今日)',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 114, 112, 112),
+                            )),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.40,
+                          child: Stack(
+                            children: [
+                              charts.PieChart<String>(
+                                _seriesPieData!,
+                                animate: false,
+                                layoutConfig: charts.LayoutConfig(
+                                  leftMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                  topMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                  rightMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                  bottomMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                ),
+                                defaultRenderer: charts.ArcRendererConfig(
+                                  arcWidth: 10,
+                                ),
+                              ),
+                              const Align(
+                                // 赤のコンテナだけを右下に配置する
+                                alignment: Alignment.center,
+                                child: Text('10.3h'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Flexible(
+                          child: ListView.builder(
+                              itemCount: entries.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Row(
+                                  children: [
+                                    Icon(
+                                      Icons.circle,
+                                      size: 11,
+                                      color: colorCodes[index],
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(entries[index]),
+                                  ],
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: const [
+                        Text('時間配分(週)',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 114, 112, 112),
+                            )),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.40,
+                          child: Stack(
+                            children: [
+                              charts.PieChart<String>(
+                                _seriesPieData!,
+                                animate: false,
+                                layoutConfig: charts.LayoutConfig(
+                                  leftMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                  topMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                  rightMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                  bottomMarginSpec:
+                                      charts.MarginSpec.fixedPixel(0),
+                                ),
+                                defaultRenderer: charts.ArcRendererConfig(
+                                    arcWidth: 10000,
+                                    arcRendererDecorators: [
+                                      charts.ArcLabelDecorator(
+                                          labelPosition:
+                                              charts.ArcLabelPosition.inside)
+                                    ]),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Flexible(
+                          child: ListView.builder(
+                              itemCount: entries.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Row(
+                                  children: [
+                                    Icon(
+                                      Icons.circle,
+                                      size: 11,
+                                      color: colorCodes[index],
+                                    ),
+                                    const SizedBox(width: 5),
+                                    Text(entries[index]),
+                                  ],
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ]),
+      )),
+    );
   }
 }
