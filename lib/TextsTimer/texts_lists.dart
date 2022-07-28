@@ -33,7 +33,32 @@ class _TextListState extends State<TextList> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Scaffold(),
+        Scaffold(
+          body: Column(children: [
+            GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                childAspectRatio: 1,
+                children: List.generate(9, (i) {
+                  return Container(
+                      margin: const EdgeInsets.all(5.0),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: LayoutBuilder(builder: (ctx, constraints) {
+                          return Column(children: [
+                            Container(
+                                height: constraints.maxHeight * 0.7,
+                                color: Colors.blue,
+                              ),
+                            Text('HELLO'),
+                          ]);
+                        }
+                      ));
+                }))
+          ]),
+        ),
         Positioned(
           bottom: 0,
           child: SizedBox(
