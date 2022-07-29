@@ -36,17 +36,22 @@ class _RecordTimeState extends State<RecordTime> {
                 '勉強時間を記録',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 17,
+                  fontSize: 20,
                   color: Colors.black,
                 ),
               ),
-              const Text(
-                '記録',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                  fontSize: 17,
-                )
+              InkWell(
+                onTap: () {
+
+                },
+                child: const Text(
+                  '記録',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue,
+                    fontSize: 20,
+                  )
+                ),
               ),
             ],
           )),

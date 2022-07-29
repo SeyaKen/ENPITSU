@@ -1,4 +1,4 @@
-import 'package:eigo/TextsTimer/record_time.dart';
+import 'package:eigo/TextsTimer/manual_or_stopwatch.dart';
 import 'package:eigo/TextsTimer/texts_search_way.dart';
 import 'package:eigo/ad_state.dart';
 import 'package:flutter/material.dart';
