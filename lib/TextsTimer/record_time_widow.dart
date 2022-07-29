@@ -9,7 +9,7 @@ class RecordTimeWindow extends StatefulWidget {
 }
 
 class _RecordTimeWindowState extends State<RecordTimeWindow> {
-  int? hour;
+  String? time;
 
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
@@ -27,10 +27,14 @@ class _RecordTimeWindowState extends State<RecordTimeWindow> {
                 CupertinoTimerPicker(
                   mode: CupertinoTimerPickerMode.hm,
                   onTimerDurationChanged: (value) {
-                    print(value.toString().length);
-                    print(
-                        'hour:${value.toString().length == 14 ? value.toString().substring(0, 1) : value.toString().substring(0, 2)}');
-                    print('minutes:${value.toString().length == 14 ? value.toString().substring(2, 4) : value.toString().substring(3, 5)}');
+                    setState(() {
+                      print(value.toString().length);
+                      print(
+                          'hour:${value.toString().length == 14 ? value.toString().substring(0, 1) : value.toString().substring(0, 2)}');
+                      print(
+                          'minutes:${value.toString().length == 14 ? value.toString().substring(2, 4) : value.toString().substring(3, 5)}');
+                      time = value.toString();
+                    });
                   },
                 ),
               ],
@@ -64,7 +68,12 @@ class _RecordTimeWindowState extends State<RecordTimeWindow> {
                 color: Colors.black,
               ),
             ),
-            child: Text('$hour'),
+            child: Text(
+              '${time.toString().length == 14 ? time.toString().substring(0, 1) : time.toString().substring(0, 2)}時間${time.toString().length == 14 ? time.toString().substring(2, 4) : time.toString().substring(3, 5)}分',
+              style: TextStyle(
+                fontSize: 35,
+              ),
+            ),
           )
         ],
       ),
