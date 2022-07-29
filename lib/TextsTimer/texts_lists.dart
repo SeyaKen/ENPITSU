@@ -1,3 +1,4 @@
+import 'package:eigo/TextsTimer/record_time.dart';
 import 'package:eigo/TextsTimer/texts_search_way.dart';
 import 'package:eigo/ad_state.dart';
 import 'package:flutter/material.dart';
@@ -56,47 +57,62 @@ class _TextListState extends State<TextList> {
                       childAspectRatio: 0.65,
                       children: List.generate(3, (i) {
                         return i != 0
-                            ? Container(
-                                margin: const EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child:
-                                    LayoutBuilder(builder: (ctx, constraints) {
-                                  return Column(children: [
-                                    SizedBox(
-                                      height: constraints.maxWidth,
-                                      width: constraints.maxWidth,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
-                                          // こんな画像のアドレスは存在しない.
-                                          'https://images-na.ssl-images-amazon.com/images/I/417gMKTA1pL._SX312_BO1,204,203,200_.jpg',
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                            ? InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          const RecordTime(),
+                                      transitionDuration:
+                                          const Duration(seconds: 0),
                                     ),
-                                    const SizedBox(height: 5),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: Row(
-                                        children: const [
-                                          Flexible(
-                                            child: Text(
-                                              '英単語ターゲット1900 6訂版 (大学JUKEN新書) 単行本（ソフトカバー）',
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                              maxLines: 3,
+                                  );
+                                },
+                                child: Container(
+                                    margin: const EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: LayoutBuilder(
+                                        builder: (ctx, constraints) {
+                                      return Column(children: [
+                                        SizedBox(
+                                          height: constraints.maxWidth,
+                                          width: constraints.maxWidth,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.network(
+                                              // こんな画像のアドレスは存在しない.
+                                              'https://images-na.ssl-images-amazon.com/images/I/417gMKTA1pL._SX312_BO1,204,203,200_.jpg',
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ]);
-                                }))
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Row(
+                                            children: const [
+                                              Flexible(
+                                                child: Text(
+                                                  '英単語ターゲット1900 6訂版 (大学JUKEN新書) 単行本（ソフトカバー）',
+                                                  style: TextStyle(
+                                                    fontSize: 15,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  maxLines: 3,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ]);
+                                    })),
+                              )
                             : Container(
                                 margin: const EdgeInsets.all(3),
                                 decoration: BoxDecoration(
@@ -140,7 +156,8 @@ class _TextListState extends State<TextList> {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 5),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: const [
                                             Flexible(
                                               child: Text(
