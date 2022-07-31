@@ -76,7 +76,9 @@ class _RecordTimeState extends State<RecordTime> {
                 1: Text("ストップウォッチ"),
               },
               onValueChanged: (value) {
-                selectedValue = value!;
+                setState(() {
+                  selectedValue = value!;
+                });
               },
               groupValue: selectedValue,
             ),
@@ -96,6 +98,7 @@ class _RecordTimeState extends State<RecordTime> {
 
 // 手動で記録するWindow
 String time = '0:00:00.000000';
+
 class RecordTimeWindow extends StatefulWidget {
   const RecordTimeWindow({super.key});
 
@@ -104,7 +107,6 @@ class RecordTimeWindow extends StatefulWidget {
 }
 
 class _RecordTimeWindowState extends State<RecordTimeWindow> {
-
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
         context: context,
@@ -121,7 +123,8 @@ class _RecordTimeWindowState extends State<RecordTimeWindow> {
                   mode: CupertinoTimerPickerMode.hm,
                   onTimerDurationChanged: (value) {
                     setState(() {
-                      time = value.toString();
+                      time =
+                          '${value.toString().length == 14 ? value.toString().substring(0, 1) : value.toString().substring(0, 2)}時間${value.toString().length == 14 ? value.toString().substring(2, 4) : value.toString().substring(3, 5)}分';
                     });
                   },
                 ),
@@ -167,7 +170,6 @@ class _RecordTimeWindowState extends State<RecordTimeWindow> {
     );
   }
 }
-
 
 class TextsTimer extends StatefulWidget {
   const TextsTimer({super.key});
@@ -318,5 +320,3 @@ class _TextsTimerState extends State<TextsTimer> {
     ));
   }
 }
-
-
