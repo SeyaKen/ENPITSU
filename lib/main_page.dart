@@ -1,6 +1,5 @@
 import 'package:eigo/Chart/benkyoukiroku.dart';
 import 'package:eigo/TextsTimer/texts_lists.dart';
-import 'package:eigo/TextsTimer/timer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:eigo/Home/home_screen.dart';
