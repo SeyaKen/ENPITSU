@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eigo/main_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,12 @@ class _RecordTimeState extends State<RecordTime> {
                       .set({
                     'ターゲット1900': time,
                   });
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => MainPage(currenttab: 0,),
+                        transitionDuration: const Duration(seconds: 0),
+                      ));
                 },
                 child: const Text('記録',
                     style: TextStyle(

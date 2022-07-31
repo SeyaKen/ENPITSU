@@ -63,7 +63,7 @@ class _TextListState extends State<TextList> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (_, __, ___) =>
-                                          RecordTime(),
+                                          const RecordTime(),
                                       transitionDuration:
                                           const Duration(seconds: 0),
                                     ),

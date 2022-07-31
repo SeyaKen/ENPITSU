@@ -101,8 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   List preForSearch = [];
                   if (text.length > 1) {
                     for (int i = 0; i < text.length - 1; i++) {
-                      if (!preForSearch
-                          .contains(text.substring(i, i + 2))) {
+                      if (!preForSearch.contains(text.substring(i, i + 2))) {
                         preForSearch.add(text.substring(i, i + 2));
                       }
                     }
