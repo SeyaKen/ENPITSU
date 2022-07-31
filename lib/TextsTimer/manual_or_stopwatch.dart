@@ -296,13 +296,13 @@ class _TextsTimerState extends State<TextsTimer> {
                 isZero
                     ? InkWell(
                         onTap: () {
-                          minutes = '600';
                           val = int.parse(minutes) < 60
                               ? '0:${minutes}:00.000000'
                               : int.parse(minutes) >= 600
+                                  // 10時間以上の場合
                                   ? '${(int.parse(minutes) / 60).floor()}:${(int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()) < 10 ? '0${int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()}' : (int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()).toString()}:00.000000'
+                                  // 10時間未満の場合
                                   : '0${(int.parse(minutes) / 60).floor()}:${(int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()) < 10 ? '0${int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()}' : (int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()).toString()}:00.000000';
-                          print(val);
                           time =
                               '${val.toString().length == 14 ? val.toString().substring(0, 1) : val.toString().substring(0, 2)}時間${val.toString().length == 14 ? val.toString().substring(2, 4) : val.toString().substring(3, 5)}分';
                         },
