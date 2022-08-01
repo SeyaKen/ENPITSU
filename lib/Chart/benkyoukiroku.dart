@@ -39,7 +39,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
     const Color(0xff0064aa),
   ];
 
-  getHomeLists() async {
+  getBenkyouJikan() async {
     dataStateStream = FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
@@ -68,7 +68,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
     );
   }
 
-  List<charts.Series<dynamic, String>> getData() {
+  List<charts.Series<dynamic, String>> getData(List textsData) {
     final desktopSalesData = [
       BarData(
           DateTime(date.year, date.month, date.day - 6)
@@ -111,97 +111,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          10),
-    ];
-
-    final tableSalesData = [
-      BarData(
-          DateTime(date.year, date.month, date.day - 6)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          5),
-      BarData(
-          DateTime(date.year, date.month, date.day - 5)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 4)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 3)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 2)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          10),
-      BarData(
-          DateTime(date.year, date.month, date.day - 1)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          10),
-      BarData(
-          DateTime(date.year, date.month, date.day)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          10),
-    ];
-
-    final mobileSalesData = [
-      BarData(
-          DateTime(date.year, date.month, date.day - 6)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          5),
-      BarData(
-          DateTime(date.year, date.month, date.day - 5)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 4)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 3)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 2)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          10),
-      BarData(
-          DateTime(date.year, date.month, date.day - 1)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          10),
-      BarData(
-          DateTime(date.year, date.month, date.day)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          0),
+          int.parse(textsData[0]['ターゲット1900'][0]) * 60 + int.parse(textsData[0]['ターゲット1900'][1])),
     ];
 
     return [
@@ -211,24 +121,13 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
         measureFn: (BarData sales, _) => sales.sales,
         data: desktopSalesData,
       ),
-      charts.Series<BarData, String>(
-        id: '英語',
-        domainFn: (BarData sales, _) => sales.year,
-        measureFn: (BarData sales, _) => sales.sales,
-        data: tableSalesData,
-      ),
-      charts.Series<BarData, String>(
-        id: '韓国語',
-        domainFn: (BarData sales, _) => sales.year,
-        measureFn: (BarData sales, _) => sales.sales,
-        data: mobileSalesData,
-      ),
     ];
   }
 
   @override
   void initState() {
     date = DateTime.now();
+    getBenkyouJikan();
     _seriesPieData = <charts.Series<Task, String>>[];
     _generateData();
     super.initState();
@@ -259,7 +158,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                       children: [
                         Row(
                           children: const [
-                            Text('学習時間',
+                            Text('学習時間(分)',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Color.fromARGB(255, 114, 112, 112),
@@ -268,11 +167,22 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                         ),
                         AspectRatio(
                             aspectRatio: 16 / 9,
-                            child: charts.BarChart(
-                              getData(),
-                              animate: false,
-                              barGroupingType: charts.BarGroupingType.stacked,
-                            )),
+                            child: StreamBuilder(
+                                stream: dataStateStream,
+                                builder: (context, snapshot) {
+                                  snapshot.hasData
+                                      ? print(snapshot.data!.docs[0]['ターゲット1900'][0])
+                                      : print('snapshot.error');
+                                  return snapshot.hasData
+                                      ? charts.BarChart(
+                                          getData(snapshot.data!.docs),
+                                          animate: false,
+                                          barGroupingType:
+                                              charts.BarGroupingType.stacked,
+                                        )
+                                      : const Center(
+                                          child: CircularProgressIndicator());
+                                })),
                         const SizedBox(
                           height: 40,
                         ),

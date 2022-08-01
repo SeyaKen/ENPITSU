@@ -48,18 +48,23 @@ class _RecordTimeState extends State<RecordTime> {
               ),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    time = '0:00:00.000000';
+                  });
                   FirebaseFirestore.instance
                       .collection('users')
                       .doc(uid)
                       .collection('BenkyouJikan')
                       .doc(DateTime.now().toString().substring(0, 10))
                       .set({
-                    'ターゲット1900': time,
+                    'ターゲット1900': SavedTime,
                   });
                   Navigator.push(
                       context,
                       PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => MainPage(currenttab: 0,),
+                        pageBuilder: (_, __, ___) => MainPage(
+                          currenttab: 0,
+                        ),
                         transitionDuration: const Duration(seconds: 0),
                       ));
                 },
@@ -105,6 +110,9 @@ class _RecordTimeState extends State<RecordTime> {
 
 // 手動で記録するWindow
 String time = '0:00:00.000000';
+List<Map<String, List<String>>> SavedTime = [
+  {'ターゲット1900': []}
+];
 
 class RecordTimeWindow extends StatefulWidget {
   const RecordTimeWindow({super.key});
@@ -130,8 +138,17 @@ class _RecordTimeWindowState extends State<RecordTimeWindow> {
                   mode: CupertinoTimerPickerMode.hm,
                   onTimerDurationChanged: (value) {
                     setState(() {
+                      print(SavedTime[0]);
                       time =
                           '${value.toString().length == 14 ? value.toString().substring(0, 1) : value.toString().substring(0, 2)}時間${value.toString().length == 14 ? value.toString().substring(2, 4) : value.toString().substring(3, 5)}分';
+                      SavedTime[0]['ターゲット1900'] = [
+                        (value.toString().length == 14
+                            ? value.toString().substring(0, 1)
+                            : value.toString().substring(0, 2)),
+                        (value.toString().length == 14
+                            ? value.toString().substring(2, 4)
+                            : value.toString().substring(3, 5))
+                      ];
                     });
                   },
                 ),
@@ -312,6 +329,14 @@ class _TextsTimerState extends State<TextsTimer> {
                                   : '0${(int.parse(minutes) / 60).floor()}:${(int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()) < 10 ? '0${int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()}' : (int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()).toString()}:00.000000';
                           time =
                               '${val.toString().length == 14 ? val.toString().substring(0, 1) : val.toString().substring(0, 2)}時間${val.toString().length == 14 ? val.toString().substring(2, 4) : val.toString().substring(3, 5)}分';
+                          SavedTime[0]['ターゲット1900'] = [
+                            (val.toString().length == 14
+                                ? val.toString().substring(0, 1)
+                                : val.toString().substring(0, 2)),
+                            (val.toString().length == 14
+                                ? val.toString().substring(2, 4)
+                                : val.toString().substring(3, 5))
+                          ];
                         },
                         child: Container(
                           padding: const EdgeInsets.all(5.0),
