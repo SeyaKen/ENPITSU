@@ -110,9 +110,7 @@ class _RecordTimeState extends State<RecordTime> {
 
 // 手動で記録するWindow
 String time = '0:00:00.000000';
-List<Map<String, List<String>>> SavedTime = [
-  {'ターゲット1900': []}
-];
+List? SavedTime;
 
 class RecordTimeWindow extends StatefulWidget {
   const RecordTimeWindow({super.key});
@@ -138,10 +136,9 @@ class _RecordTimeWindowState extends State<RecordTimeWindow> {
                   mode: CupertinoTimerPickerMode.hm,
                   onTimerDurationChanged: (value) {
                     setState(() {
-                      print(SavedTime[0]);
                       time =
                           '${value.toString().length == 14 ? value.toString().substring(0, 1) : value.toString().substring(0, 2)}時間${value.toString().length == 14 ? value.toString().substring(2, 4) : value.toString().substring(3, 5)}分';
-                      SavedTime[0]['ターゲット1900'] = [
+                      SavedTime = [
                         (value.toString().length == 14
                             ? value.toString().substring(0, 1)
                             : value.toString().substring(0, 2)),
@@ -329,7 +326,7 @@ class _TextsTimerState extends State<TextsTimer> {
                                   : '0${(int.parse(minutes) / 60).floor()}:${(int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()) < 10 ? '0${int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()}' : (int.parse(minutes) - 60 * (int.parse(minutes) / 60).floor()).toString()}:00.000000';
                           time =
                               '${val.toString().length == 14 ? val.toString().substring(0, 1) : val.toString().substring(0, 2)}時間${val.toString().length == 14 ? val.toString().substring(2, 4) : val.toString().substring(3, 5)}分';
-                          SavedTime[0]['ターゲット1900'] = [
+                          SavedTime = [
                             (val.toString().length == 14
                                 ? val.toString().substring(0, 1)
                                 : val.toString().substring(0, 2)),
