@@ -74,6 +74,19 @@ class _VerifyScreenState extends State<VerifyScreen> {
         'selfIntroduction': '',
         'uid': uid,
       });
+      for (int i = 0; i < 7; i++) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(uid)
+            .collection('BenkyouJikan')
+            .doc()
+            .set({
+          'date': DateTime(DateTime.now().year, DateTime.now().month,
+                  DateTime.now().day - i)
+              .toString()
+              .substring(0, 10),
+        });
+      }
       SharedPreferenceHelper().saveUserName('LogIned');
       Navigator.push(
           context,

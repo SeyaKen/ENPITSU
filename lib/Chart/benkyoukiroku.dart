@@ -70,54 +70,96 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
   }
 
   List<charts.Series<dynamic, String>> getData(List textsData) {
-    final desktopSalesData = [
-      BarData(
-          DateTime(date.year, date.month, date.day - 6)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          5),
-      BarData(
-          DateTime(date.year, date.month, date.day - 5)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 4)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 3)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          14),
-      BarData(
-          DateTime(date.year, date.month, date.day - 2)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          int.parse(textsData[textsData.length - 2]['ターゲット1900'][0]) * 60 +
-              int.parse(textsData[textsData.length - 2]['ターゲット1900'][1])),
-      BarData(
-          DateTime(date.year, date.month, date.day - 1)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          int.parse(textsData[textsData.length - 2]['ターゲット1900'][0]) * 60 +
-              int.parse(textsData[textsData.length - 2]['ターゲット1900'][1])),
-      BarData(
-          DateTime(date.year, date.month, date.day)
-              .toString()
-              .substring(6, 10)
-              .replaceAll('-', '/'),
-          int.parse(textsData.last['ターゲット1900'][0]) * 60 +
-              int.parse(textsData.last['ターゲット1900'][1])),
-    ];
+    List? containCheck;
+    var desktopSalesData;
+    for (int i = 0; i < 7; i++) {
+      if (textsData[i]['date'] != null) {
+        containCheck!.add(i);
 
+        if (i == 6) {
+          desktopSalesData = [
+            BarData(
+                DateTime(date.year, date.month, date.day - 6)
+                    .toString()
+                    .substring(6, 10)
+                    .replaceAll('-', '/'),
+                textsData[containCheck[6]]['date'] == DateTime(date.year, date.month, date.day - 6)
+                    .toString()
+                    .substring(0, 10) 
+                ? textsData[containCheck[6]]['date']
+                : 0),
+            BarData(
+                DateTime(date.year, date.month, date.day - 5)
+                    .toString()
+                    .substring(6, 10)
+                    .replaceAll('-', '/'),
+                textsData[containCheck[5]]['date'] == DateTime(date.year, date.month, date.day - 5)
+                    .toString()
+                    .substring(0, 10) 
+                ? textsData[containCheck[5]]['date']
+                : 0),
+            BarData(
+                DateTime(date.year, date.month, date.day - 4)
+                    .toString()
+                    .substring(6, 10)
+                    .replaceAll('-', '/'),
+                textsData[containCheck[4]]['date'] == DateTime(date.year, date.month, date.day - 4)
+                    .toString()
+                    .substring(0, 10) 
+                ? textsData[containCheck[4]]['date']
+                : 0),
+            BarData(
+                DateTime(date.year, date.month, date.day - 3)
+                    .toString()
+                    .substring(6, 10)
+                    .replaceAll('-', '/'),
+                textsData[containCheck[3]]['date'] == DateTime(date.year, date.month, date.day - 3)
+                    .toString()
+                    .substring(0, 10) 
+                ? textsData[containCheck[3]]['date']
+                : 0),
+            BarData(
+                DateTime(date.year, date.month, date.day - 2)
+                    .toString()
+                    .substring(6, 10)
+                    .replaceAll('-', '/'),
+                textsData[containCheck[2]]['date'] == DateTime(date.year, date.month, date.day - 2)
+                    .toString()
+                    .substring(0, 10) 
+                ? textsData[containCheck[2]]['date']
+                : 0),
+            BarData(
+                DateTime(date.year, date.month, date.day - 1)
+                    .toString()
+                    .substring(6, 10)
+                    .replaceAll('-', '/'),
+                textsData[containCheck[1]]['date'] == DateTime(date.year, date.month, date.day - 1)
+                    .toString()
+                    .substring(0, 10) 
+                ? textsData[containCheck[1]]['date']
+                : 0),
+            BarData(
+                DateTime(date.year, date.month, date.day)
+                    .toString()
+                    .substring(6, 10)
+                    .replaceAll('-', '/'),
+                textsData[containCheck[0]]['date'] == DateTime(date.year, date.month, date.day - 0)
+                    .toString()
+                    .substring(0, 10) 
+                ? textsData[containCheck[0]]['date']
+                : 0),
+          ];
+          return [
+            charts.Series<BarData, String>(
+              id: 'プログラミング',
+              domainFn: (BarData sales, _) => sales.year,
+              measureFn: (BarData sales, _) => sales.sales,
+              data: desktopSalesData,
+            ),
+          ];
+        }
+      }
+    }
     return [
       charts.Series<BarData, String>(
         id: 'プログラミング',
@@ -133,7 +175,6 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
     date = DateTime.now();
     today =
         DateTime(date.year, date.month, date.day).toString().substring(0, 10);
-    print(today);
     getBenkyouJikan();
     _seriesPieData = <charts.Series<Task, String>>[];
     _generateData();
