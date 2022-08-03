@@ -46,7 +46,7 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                           child: Text('エラーが発生しました、もう一度やり直してください。'),
                         )
                       : Scaffold(
-                          backgroundColor: Colors.white,
+                          backgroundColor: const Color(0XFFF2D095),
                           body: Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -129,36 +129,37 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                                       }
                                     }
                                   },
-                                  child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 15),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black, width: 0.5),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      width: MediaQuery.of(context).size.width *
-                                          0.8,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                              width: 24,
-                                              height: 24,
-                                              child: Image.asset(
-                                                  'assets/googleLogo.png')),
-                                          const Text('Googleで始める',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                          const FaIcon(
-                                            FontAwesomeIcons.google,
-                                            color: Colors.transparent,
-                                          ),
-                                        ],
-                                      )),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(5),
+                                    child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20, vertical: 15),
+                                        color: Colors.white,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.8,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                                width: 24,
+                                                height: 24,
+                                                child: Image.asset(
+                                                    'assets/googleLogo.png')),
+                                            const Text('Googleで始める',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            const FaIcon(
+                                              FontAwesomeIcons.google,
+                                              color: Colors.transparent,
+                                            ),
+                                          ],
+                                        )),
+                                  ),
                                 ),
                                 const SizedBox(height: 30),
                                 InkWell(
@@ -220,15 +221,14 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
                                             Navigator.push(
-                                                      context,
-                                                      PageRouteBuilder(
-                                                        pageBuilder: (_, __,
-                                                                ___) =>
-                                                            const Riyoukiyaku(),
-                                                        transitionDuration:
-                                                            const Duration(
-                                                                seconds: 0),
-                                                      ));
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
+                                                      const Riyoukiyaku(),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          seconds: 0),
+                                                ));
                                           },
                                         text: '利用規約',
                                       ),
@@ -241,15 +241,14 @@ class _SelectLoginScreenState extends State<SelectLoginScreen> {
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
                                             Navigator.push(
-                                                      context,
-                                                      PageRouteBuilder(
-                                                        pageBuilder: (_, __,
-                                                                ___) =>
-                                                            const PrivacyPolicy(),
-                                                        transitionDuration:
-                                                            const Duration(
-                                                                seconds: 0),
-                                                      ));
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
+                                                      const PrivacyPolicy(),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          seconds: 0),
+                                                ));
                                           },
                                         text: 'プライバシーポリシー',
                                       ),

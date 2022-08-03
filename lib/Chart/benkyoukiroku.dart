@@ -86,7 +86,9 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                 textsData[containCheck[6]]['date'] == DateTime(date.year, date.month, date.day - 6)
                     .toString()
                     .substring(0, 10) 
-                ? textsData[containCheck[6]]['date']
+                ? textsData[containCheck[6]]['Kyouzai'].length != 0 
+                ? textsData[containCheck[6]][['Kyouzai'][0]]
+                : 0
                 : 0),
             BarData(
                 DateTime(date.year, date.month, date.day - 5)
@@ -96,7 +98,9 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                 textsData[containCheck[5]]['date'] == DateTime(date.year, date.month, date.day - 5)
                     .toString()
                     .substring(0, 10) 
-                ? textsData[containCheck[5]]['date']
+                ? textsData[containCheck[5]]['Kyouzai'].length != 0 
+                ? textsData[containCheck[5]][['Kyouzai'][0]]
+                : 0
                 : 0),
             BarData(
                 DateTime(date.year, date.month, date.day - 4)
@@ -106,7 +110,9 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                 textsData[containCheck[4]]['date'] == DateTime(date.year, date.month, date.day - 4)
                     .toString()
                     .substring(0, 10) 
-                ? textsData[containCheck[4]]['date']
+                ? textsData[containCheck[4]]['Kyouzai'].length != 0 
+                ? textsData[containCheck[4]][['Kyouzai'][0]]
+                : 0
                 : 0),
             BarData(
                 DateTime(date.year, date.month, date.day - 3)
@@ -116,7 +122,9 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                 textsData[containCheck[3]]['date'] == DateTime(date.year, date.month, date.day - 3)
                     .toString()
                     .substring(0, 10) 
-                ? textsData[containCheck[3]]['date']
+                ? textsData[containCheck[3]]['Kyouzai'].length != 0 
+                ? textsData[containCheck[3]][['Kyouzai'][0]]
+                : 0
                 : 0),
             BarData(
                 DateTime(date.year, date.month, date.day - 2)
@@ -126,7 +134,9 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                 textsData[containCheck[2]]['date'] == DateTime(date.year, date.month, date.day - 2)
                     .toString()
                     .substring(0, 10) 
-                ? textsData[containCheck[2]]['date']
+                ? textsData[containCheck[2]]['Kyouzai'].length != 0 
+                ? textsData[containCheck[2]][['Kyouzai'][0]]
+                : 0
                 : 0),
             BarData(
                 DateTime(date.year, date.month, date.day - 1)

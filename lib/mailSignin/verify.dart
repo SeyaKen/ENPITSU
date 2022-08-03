@@ -85,6 +85,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                   DateTime.now().day - i)
               .toString()
               .substring(0, 10),
+          'Kyouzai': [],
         });
       }
       SharedPreferenceHelper().saveUserName('LogIned');
