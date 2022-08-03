@@ -79,7 +79,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
             .collection('users')
             .doc(uid)
             .collection('BenkyouJikan')
-            .doc()
+            .doc(DateTime(DateTime.now().year, DateTime.now().month,
+                  DateTime.now().day - i).toString()
+              .substring(0, 10))
             .set({
           'date': DateTime(DateTime.now().year, DateTime.now().month,
                   DateTime.now().day - i)

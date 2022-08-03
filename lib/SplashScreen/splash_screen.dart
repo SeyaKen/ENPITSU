@@ -20,7 +20,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
           context,
           MaterialPageRoute(
               builder: (c) => loginCheck == 'LogIned'
-                  ? MainPage(
+                  ?  MainPage(
                       currenttab: 0,
                     )
                   : const SelectLoginScreen()));

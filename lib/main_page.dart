@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eigo/Chart/benkyoukiroku.dart';
 import 'package:eigo/TextsTimer/texts_lists.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,8 +33,23 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     onScreenLoaded();
-    setState(() {});
+    print(DateTime.now().hour);
+    DateTime.now().hour == 0 && DateTime.now().hour == 0
+        ? FirebaseFirestore.instance
+            .collection('users')
+            .doc(myUserUid)
+            .collection('BenkyouJikan')
+            .doc()
+            .set({
+            'date': DateTime(DateTime.now().year, DateTime.now().month,
+                    DateTime.now().day)
+                .toString()
+                .substring(0, 10),
+            'Kyouzai': [],
+          })
+        : null;
     super.initState();
+    setState(() {});
   }
 
   @override
