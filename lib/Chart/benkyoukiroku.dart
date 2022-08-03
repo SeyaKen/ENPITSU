@@ -100,19 +100,22 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          10),
+          int.parse(textsData[textsData.length - 2]['ターゲット1900'][0]) * 60 +
+              int.parse(textsData[textsData.length - 2]['ターゲット1900'][1])),
       BarData(
           DateTime(date.year, date.month, date.day - 1)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          10),
+          int.parse(textsData[textsData.length - 2]['ターゲット1900'][0]) * 60 +
+              int.parse(textsData[textsData.length - 2]['ターゲット1900'][1])),
       BarData(
           DateTime(date.year, date.month, date.day)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          int.parse(textsData[0]['ターゲット1900'][0]) * 60 + int.parse(textsData[0]['ターゲット1900'][1])),
+          int.parse(textsData.last['ターゲット1900'][0]) * 60 +
+              int.parse(textsData.last['ターゲット1900'][1])),
     ];
 
     return [
@@ -128,9 +131,8 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
   @override
   void initState() {
     date = DateTime.now();
-    today = DateTime(date.year, date.month, date.day)
-              .toString()
-              .substring(0, 10);
+    today =
+        DateTime(date.year, date.month, date.day).toString().substring(0, 10);
     print(today);
     getBenkyouJikan();
     _seriesPieData = <charts.Series<Task, String>>[];
@@ -176,7 +178,8 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                                 stream: dataStateStream,
                                 builder: (context, snapshot) {
                                   snapshot.hasData
-                                      ? print(snapshot.data!.docs[0]['ターゲット1900'][0])
+                                      ? print(snapshot.data!.docs[0]
+                                          ['ターゲット1900'][0])
                                       : print('snapshot.error');
                                   return snapshot.hasData
                                       ? charts.BarChart(

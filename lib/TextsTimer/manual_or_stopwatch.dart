@@ -57,6 +57,7 @@ class _RecordTimeState extends State<RecordTime> {
                       .collection('BenkyouJikan')
                       .doc(DateTime.now().toString().substring(0, 10))
                       .set({
+                    'date': DateTime.now().toString().substring(0, 10), 
                     'ターゲット1900': SavedTime,
                   });
                   Navigator.push(
