@@ -32,6 +32,7 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   Stream<QuerySnapshot<Object?>>? dataStateStream;
   List<charts.Series<Task, String>>? _seriesPieData;
+  String? today;
   final List<String> entries = <String>['韓国語', 'プログラミング', '英語'];
   final List<Color> colorCodes = [
     const Color(0xff7ba734),
@@ -127,6 +128,10 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
   @override
   void initState() {
     date = DateTime.now();
+    today = DateTime(date.year, date.month, date.day)
+              .toString()
+              .substring(0, 10);
+    print(today);
     getBenkyouJikan();
     _seriesPieData = <charts.Series<Task, String>>[];
     _generateData();
