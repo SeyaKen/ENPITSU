@@ -15,8 +15,18 @@ class RecordTime extends StatefulWidget {
 
 class _RecordTimeState extends State<RecordTime> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
-
+  Stream<QuerySnapshot<Object?>>? listStateStream;
   int selectedValue = 0;
+
+  @override
+  void initState() {
+    listStateStream = FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('BenkyouJikan')
+        .snapshots();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,59 +35,79 @@ class _RecordTimeState extends State<RecordTime> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation: 0,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  size: 30,
-                  color: Colors.black,
-                ),
-              ),
-              const Text(
-                '勉強時間を記録',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.black,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    time = '0:00:00.000000';
-                  });
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(uid)
-                      .collection('BenkyouJikan')
-                      .doc(DateTime.now().toString().substring(0, 10))
-                      .set({
-                    'date': DateTime.now().toString().substring(0, 10), 
-                    'ターゲット1900': SavedTime,
-                  });
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => MainPage(
-                          currenttab: 0,
-                        ),
-                        transitionDuration: const Duration(seconds: 0),
-                      ));
-                },
-                child: const Text('記録',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
-                      fontSize: 20,
-                    )),
-              ),
-            ],
-          )),
+          title: StreamBuilder(
+              stream: listStateStream,
+              builder: (context, snapshot) {
+                List? updatedList;
+                if (snapshot.hasData) {
+                  List abbr = snapshot.data!.docs.last['Kyouzai'];
+                  updatedList = abbr;
+                  if (!snapshot.data!.docs.last['Kyouzai']
+                      .contains('ターゲット1900')) {
+                    print(abbr);
+                    abbr[abbr.length] = 'ターゲット1900';
+                  }
+                }
+                return snapshot.hasData
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              size: 30,
+                              color: Colors.black,
+                            ),
+                          ),
+                          const Text(
+                            '勉強時間を記録',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                time = '0:00:00.000000';
+                              });
+                              FirebaseFirestore.instance
+                                  .collection('users')
+                                  .doc(uid)
+                                  .collection('BenkyouJikan')
+                                  .doc(DateTime.now()
+                                      .toString()
+                                      .substring(0, 10))
+                                  .update({
+                                'Kyouzai': updatedList,
+                                'ターゲット1900': SavedTime,
+                              });
+
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) => MainPage(
+                                      currenttab: 0,
+                                    ),
+                                    transitionDuration:
+                                        const Duration(seconds: 0),
+                                  ));
+                            },
+                            child: const Text('記録',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                  fontSize: 20,
+                                )),
+                          ),
+                        ],
+                      )
+                    : const CircularProgressIndicator();
+              })),
       body: Column(
         children: [
           const SizedBox(height: 10),
