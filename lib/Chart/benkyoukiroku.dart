@@ -70,106 +70,66 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
   }
 
   List<charts.Series<dynamic, String>> getData(List textsData) {
-    List? containCheck;
-    var desktopSalesData;
-    for (int i = 0; i < 7; i++) {
-      if (textsData[i]['date'] != null) {
-        containCheck!.add(i);
+    List<BarData> desktopSalesData;
+    desktopSalesData = [
+      BarData(
+          DateTime(date.year, date.month, date.day - 6)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          textsData[textsData.length - 7]['Kyouzai'].length != 0 ?
+          textsData[textsData.length - 7][['Kyouzai'][0]]
+          : 0),
+      BarData(
+          DateTime(date.year, date.month, date.day - 5)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          textsData[textsData.length - 6]['Kyouzai'].length != 0 
+          ? textsData[textsData.length - 6][['Kyouzai'][0]]
+          : 0),
+      BarData(
+          DateTime(date.year, date.month, date.day - 4)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          textsData[textsData.length - 5]['Kyouzai'].length != 0 
+          ? textsData[textsData.length - 5][['Kyouzai'][0]]
+          : 0),
+      BarData(
+          DateTime(date.year, date.month, date.day - 3)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          textsData[textsData.length - 4]['Kyouzai'].length != 0 
+          ? textsData[textsData.length - 4][['Kyouzai'][0]]
+          : 0),
+      BarData(
+          DateTime(date.year, date.month, date.day - 2)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          textsData[textsData.length - 3]['Kyouzai'].length != 0 
+          ? textsData[textsData.length - 3][['Kyouzai'][0]]
+          : 0),
+      BarData(
+          DateTime(date.year, date.month, date.day - 1)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          textsData[textsData.length - 2]['Kyouzai'].length != 0 
+          ? textsData[textsData.length - 2][['Kyouzai'][0]]
+          : 0),
+      BarData(
+          DateTime(date.year, date.month, date.day)
+              .toString()
+              .substring(6, 10)
+              .replaceAll('-', '/'),
+          textsData[textsData.length - 1]['Kyouzai'].length != 0 
+          ? textsData[textsData.length - 1][['Kyouzai'][0]]
+          : 0),
+    ];
 
-        if (i == 6) {
-          desktopSalesData = [
-            BarData(
-                DateTime(date.year, date.month, date.day - 6)
-                    .toString()
-                    .substring(6, 10)
-                    .replaceAll('-', '/'),
-                textsData[containCheck[6]]['date'] == DateTime(date.year, date.month, date.day - 6)
-                    .toString()
-                    .substring(0, 10) 
-                ? textsData[containCheck[6]]['Kyouzai'].length != 0 
-                ? textsData[containCheck[6]][['Kyouzai'][0]]
-                : 0
-                : 0),
-            BarData(
-                DateTime(date.year, date.month, date.day - 5)
-                    .toString()
-                    .substring(6, 10)
-                    .replaceAll('-', '/'),
-                textsData[containCheck[5]]['date'] == DateTime(date.year, date.month, date.day - 5)
-                    .toString()
-                    .substring(0, 10) 
-                ? textsData[containCheck[5]]['Kyouzai'].length != 0 
-                ? textsData[containCheck[5]][['Kyouzai'][0]]
-                : 0
-                : 0),
-            BarData(
-                DateTime(date.year, date.month, date.day - 4)
-                    .toString()
-                    .substring(6, 10)
-                    .replaceAll('-', '/'),
-                textsData[containCheck[4]]['date'] == DateTime(date.year, date.month, date.day - 4)
-                    .toString()
-                    .substring(0, 10) 
-                ? textsData[containCheck[4]]['Kyouzai'].length != 0 
-                ? textsData[containCheck[4]][['Kyouzai'][0]]
-                : 0
-                : 0),
-            BarData(
-                DateTime(date.year, date.month, date.day - 3)
-                    .toString()
-                    .substring(6, 10)
-                    .replaceAll('-', '/'),
-                textsData[containCheck[3]]['date'] == DateTime(date.year, date.month, date.day - 3)
-                    .toString()
-                    .substring(0, 10) 
-                ? textsData[containCheck[3]]['Kyouzai'].length != 0 
-                ? textsData[containCheck[3]][['Kyouzai'][0]]
-                : 0
-                : 0),
-            BarData(
-                DateTime(date.year, date.month, date.day - 2)
-                    .toString()
-                    .substring(6, 10)
-                    .replaceAll('-', '/'),
-                textsData[containCheck[2]]['date'] == DateTime(date.year, date.month, date.day - 2)
-                    .toString()
-                    .substring(0, 10) 
-                ? textsData[containCheck[2]]['Kyouzai'].length != 0 
-                ? textsData[containCheck[2]][['Kyouzai'][0]]
-                : 0
-                : 0),
-            BarData(
-                DateTime(date.year, date.month, date.day - 1)
-                    .toString()
-                    .substring(6, 10)
-                    .replaceAll('-', '/'),
-                textsData[containCheck[1]]['date'] == DateTime(date.year, date.month, date.day - 1)
-                    .toString()
-                    .substring(0, 10) 
-                ? textsData[containCheck[1]]['date']
-                : 0),
-            BarData(
-                DateTime(date.year, date.month, date.day)
-                    .toString()
-                    .substring(6, 10)
-                    .replaceAll('-', '/'),
-                textsData[containCheck[0]]['date'] == DateTime(date.year, date.month, date.day - 0)
-                    .toString()
-                    .substring(0, 10) 
-                ? textsData[containCheck[0]]['date']
-                : 0),
-          ];
-          return [
-            charts.Series<BarData, String>(
-              id: 'プログラミング',
-              domainFn: (BarData sales, _) => sales.year,
-              measureFn: (BarData sales, _) => sales.sales,
-              data: desktopSalesData,
-            ),
-          ];
-        }
-      }
-    }
     return [
       charts.Series<BarData, String>(
         id: 'プログラミング',
@@ -228,10 +188,6 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                             child: StreamBuilder(
                                 stream: dataStateStream,
                                 builder: (context, snapshot) {
-                                  snapshot.hasData
-                                      ? print(snapshot.data!.docs[0]
-                                          ['ターゲット1900'][0])
-                                      : print('snapshot.error');
                                   return snapshot.hasData
                                       ? charts.BarChart(
                                           getData(snapshot.data!.docs),

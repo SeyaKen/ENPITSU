@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eigo/Chart/benkyoukiroku.dart';
 import 'package:eigo/TextsTimer/texts_lists.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -40,25 +41,25 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     timer = Timer.periodic(const Duration(seconds: 1), (Timer t) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      int lastDay = (prefs.getInt('day') ?? 0);
-      if (currentdate != lastDay && FirebaseAuth.instance.currentUser != null) {
-        await prefs.setInt('day', currentdate);
-        FirebaseFirestore.instance
-            .collection('users')
-            .doc(myUserUid)
-            .collection('BenkyouJikan')
-            .doc(DateTime(DateTime.now().year, DateTime.now().month,
-                    DateTime.now().day)
-                .toString()
-                .substring(0, 10))
-            .set({
-          'date': DateTime(
+    int lastDay = (prefs.getInt('day') ?? 0);
+    if (currentdate != lastDay && FirebaseAuth.instance.currentUser != null) {
+      await prefs.setInt('day', currentdate);
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(myUserUid)
+          .collection('BenkyouJikan')
+          .doc(DateTime(
                   DateTime.now().year, DateTime.now().month, DateTime.now().day)
               .toString()
-              .substring(0, 10),
-          'Kyouzai': [],
-        });
-      }
+              .substring(0, 10))
+          .set({
+        'date': DateTime(
+                DateTime.now().year, DateTime.now().month, DateTime.now().day)
+            .toString()
+            .substring(0, 10),
+        'Kyouzai': [],
+      });
+    }
     });
     setState(() {});
   }
@@ -112,7 +113,7 @@ class _MainPageState extends State<MainPage> {
         children: const [
           HomeScreen(),
           TextList(),
-          TextList(),
+          BenkyouKiroku(),
           ProfilePage(),
         ],
       ),

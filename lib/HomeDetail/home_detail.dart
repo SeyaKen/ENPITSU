@@ -74,7 +74,7 @@ class _HomeDetailState extends State<HomeDetail> {
                             context,
                             PageRouteBuilder(
                               pageBuilder: (_, __, ___) => MainPage(
-                                  currenttab: fromWhere == 'home' ? 0 : 1),
+                                  currenttab: fromWhere == 'home' ? 0 : 3),
                               transitionDuration: const Duration(seconds: 0),
                             ),
                           );
