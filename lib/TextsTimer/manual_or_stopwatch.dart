@@ -17,6 +17,21 @@ class _RecordTimeState extends State<RecordTime> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   Stream<QuerySnapshot<Object?>>? listStateStream;
   int selectedValue = 0;
+  late final wantedData;
+
+  dataCollect() async {
+    final docRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('BenkyouJikan')
+        .doc(DateTime.now().toString().substring(0, 10));
+
+    final docSnapshot = await docRef.get();
+    wantedData = docSnapshot.data();
+    if (!wantedData['Kyouzai'].contains('ターゲット1900')) {
+      wantedData['Kyouzai'].add('ターゲット1900');
+    }
+  }
 
   @override
   void initState() {
@@ -25,6 +40,7 @@ class _RecordTimeState extends State<RecordTime> {
         .doc(uid)
         .collection('BenkyouJikan')
         .snapshots();
+    dataCollect();
     super.initState();
   }
 
@@ -38,17 +54,7 @@ class _RecordTimeState extends State<RecordTime> {
           title: StreamBuilder(
               stream: listStateStream,
               builder: (context, snapshot) {
-                List? updatedList;
-                if (snapshot.hasData) {
-                  List abbr = snapshot.data!.docs.last['Kyouzai'];
-                  updatedList = abbr;
-                  if (!snapshot.data!.docs.last['Kyouzai']
-                      .contains('ターゲット1900')) {
-                    print(abbr);
-                    abbr[abbr.length] = 'ターゲット1900';
-                  }
-                }
-                return snapshot.hasData
+                return snapshot.hasData && wantedData != null
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -83,7 +89,7 @@ class _RecordTimeState extends State<RecordTime> {
                                       .toString()
                                       .substring(0, 10))
                                   .update({
-                                'Kyouzai': updatedList,
+                                'Kyouzai': wantedData['Kyouzai'],
                                 'ターゲット1900': SavedTime,
                               });
 

@@ -77,57 +77,85 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          textsData[textsData.length - 7]['Kyouzai'].length != 0 ?
-          textsData[textsData.length - 7][['Kyouzai'][0]]
-          : 0),
+          textsData[textsData.length - 7]['Kyouzai'].length != 0
+              ? int.parse(textsData[textsData.length - 1]
+                          [textsData[textsData.length - 7]['Kyouzai'][0]][0]) *
+                      60 +
+                  int.parse(textsData[textsData.length - 1]
+                      [textsData[textsData.length - 7]['Kyouzai'][0]][1])
+              : 0),
       BarData(
           DateTime(date.year, date.month, date.day - 5)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          textsData[textsData.length - 6]['Kyouzai'].length != 0 
-          ? textsData[textsData.length - 6][['Kyouzai'][0]]
-          : 0),
+          textsData[textsData.length - 6]['Kyouzai'].length != 0
+              ? int.parse(textsData[textsData.length - 1]
+                          [textsData[textsData.length - 6]['Kyouzai'][0]][0]) *
+                      60 +
+                  int.parse(textsData[textsData.length - 1]
+                      [textsData[textsData.length - 6]['Kyouzai'][0]][1])
+              : 0),
       BarData(
           DateTime(date.year, date.month, date.day - 4)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          textsData[textsData.length - 5]['Kyouzai'].length != 0 
-          ? textsData[textsData.length - 5][['Kyouzai'][0]]
-          : 0),
+          textsData[textsData.length - 5]['Kyouzai'].length != 0
+              ? int.parse(textsData[textsData.length - 1]
+                          [textsData[textsData.length - 5]['Kyouzai'][0]][0]) *
+                      60 +
+                  int.parse(textsData[textsData.length - 1]
+                      [textsData[textsData.length - 5]['Kyouzai'][0]][1])
+              : 0),
       BarData(
           DateTime(date.year, date.month, date.day - 3)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          textsData[textsData.length - 4]['Kyouzai'].length != 0 
-          ? textsData[textsData.length - 4][['Kyouzai'][0]]
-          : 0),
+          textsData[textsData.length - 4]['Kyouzai'].length != 0
+              ? int.parse(textsData[textsData.length - 1]
+                          [textsData[textsData.length - 4]['Kyouzai'][0]][0]) *
+                      60 +
+                  int.parse(textsData[textsData.length - 1]
+                      [textsData[textsData.length - 4]['Kyouzai'][0]][1])
+              : 0),
       BarData(
           DateTime(date.year, date.month, date.day - 2)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          textsData[textsData.length - 3]['Kyouzai'].length != 0 
-          ? textsData[textsData.length - 3][['Kyouzai'][0]]
-          : 0),
+          textsData[textsData.length - 3]['Kyouzai'].length != 0
+              ? int.parse(textsData[textsData.length - 1]
+                          [textsData[textsData.length - 3]['Kyouzai'][0]][0]) *
+                      60 +
+                  int.parse(textsData[textsData.length - 1]
+                      [textsData[textsData.length - 3]['Kyouzai'][0]][1])
+              : 0),
       BarData(
           DateTime(date.year, date.month, date.day - 1)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          textsData[textsData.length - 2]['Kyouzai'].length != 0 
-          ? textsData[textsData.length - 2][['Kyouzai'][0]]
-          : 0),
+          textsData[textsData.length - 2]['Kyouzai'].length != 0
+              ? int.parse(textsData[textsData.length - 1]
+                          [textsData[textsData.length - 2]['Kyouzai'][0]][0]) *
+                      60 +
+                  int.parse(textsData[textsData.length - 1]
+                      [textsData[textsData.length - 2]['Kyouzai'][0]][1])
+              : 0),
       BarData(
           DateTime(date.year, date.month, date.day)
               .toString()
               .substring(6, 10)
               .replaceAll('-', '/'),
-          textsData[textsData.length - 1]['Kyouzai'].length != 0 
-          ? textsData[textsData.length - 1][['Kyouzai'][0]]
-          : 0),
+          textsData[textsData.length - 1]['Kyouzai'].length != 0
+              ? int.parse(textsData[textsData.length - 1]
+                          [textsData[textsData.length - 1]['Kyouzai'][0]][0]) *
+                      60 +
+                  int.parse(textsData[textsData.length - 1]
+                      [textsData[textsData.length - 1]['Kyouzai'][0]][1])
+              : 0),
     ];
 
     return [
@@ -188,6 +216,10 @@ class _BenkyouKirokuState extends State<BenkyouKiroku> {
                             child: StreamBuilder(
                                 stream: dataStateStream,
                                 builder: (context, snapshot) {
+                                  // if (snapshot.hasData) {
+                                  //   print(snapshot.data!.docs[0]['Kyouzai']);
+                                  //   print('かきくけこ');
+                                  // }
                                   return snapshot.hasData
                                       ? charts.BarChart(
                                           getData(snapshot.data!.docs),
